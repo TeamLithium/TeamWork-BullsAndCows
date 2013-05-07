@@ -46,7 +46,6 @@ public class klasirane
         {
             this.klasiraneto.RemoveAt(this.klasiraneto.Count - 1);
         }
-
     }
 
     public void sort()
