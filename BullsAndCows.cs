@@ -5,7 +5,7 @@ using System.Linq;
 //napisah go nabyrzo ama NE SAM GO TESTVALA! probwaj dali raboti, maj ima bug ako sa 4 bika parvonanchalno
 class BullsAndCows
 {
-    private const int NUMBER_OF_DIGITS = 4;
+    private const int DigitsNumber = 4;
     private const string START_EXPRESSION = "Welcome to “Bulls and Cows” game.Please try to guess my secret 4-digit number.\n" +
                                             "Use 'top' to view the top scoreboard, 'restart' to start a new game\n" +
                                             "and 'help' to cheat and 'exit' to quit the game.";
@@ -31,30 +31,30 @@ class BullsAndCows
     private void SetDigits()
     {
         this.digits = new List<int>();
-        for (int index = 0; index < NUMBER_OF_DIGITS; index++)
+        for (int index = 0; index < DigitsNumber; index++)
         {
             digits.Add(r.Next(0, 10));
         }
-        this.helpExpression = new char[NUMBER_OF_DIGITS];
-        for (int index = 0; index < NUMBER_OF_DIGITS; index++)
+        this.helpExpression = new char[DigitsNumber];
+        for (int index = 0; index < DigitsNumber; index++)
         {
             helpExpression[index] = 'X';
         }
     }
 
-    private bool ProccessGues(string gues, out int bulls, out int cows)
+    private bool ProccessGuess(string guess, out int bulls, out int cows)
     {
         bulls = 0;
         cows = 0;
-        if (gues.Length != NUMBER_OF_DIGITS)
+        if (guess.Length != DigitsNumber)
         {
             return false;
         }
 
-        int[] guestedDigits = new int[NUMBER_OF_DIGITS];
-        for (int index = 0; index < NUMBER_OF_DIGITS; index++)
+        int[] guestedDigits = new int[DigitsNumber];
+        for (int index = 0; index < DigitsNumber; index++)
         {
-            if (!int.TryParse(gues[index].ToString(), out guestedDigits[index]))
+            if (!int.TryParse(guess[index].ToString(), out guestedDigits[index]))
             {
                 return false;
             }
@@ -73,10 +73,10 @@ class BullsAndCows
 
     private string Help()
     {
-        int helpPosition = this.r.Next(NUMBER_OF_DIGITS);
+        int helpPosition = this.r.Next(DigitsNumber);
         while (this.helpExpression[helpPosition] != 'X')
         {
-            helpPosition = this.r.Next(NUMBER_OF_DIGITS);
+            helpPosition = this.r.Next(DigitsNumber);
         }
         this.helpExpression[helpPosition] = char.Parse(this.digits[helpPosition].ToString());
         return new string(this.helpExpression);
@@ -93,11 +93,11 @@ class BullsAndCows
             do
             {
                 Console.WriteLine(ENTER_GUES);
-                string line = Console.ReadLine();
+                string line = Console.ReadLine().Trim().ToLower();
 
-                if (line.Trim().ToLower().CompareTo("help") == 0)
+                if (line.CompareTo("help") == 0)
                 {
-                    if (count2 == NUMBER_OF_DIGITS)
+                    if (count2 == DigitsNumber)
                     {
                         Console.WriteLine(HELP_UNAVAILABLE);
                         continue;
@@ -107,17 +107,17 @@ class BullsAndCows
                     Console.WriteLine("{0} {1}", HELP, helpExpression);
                     continue;
                 }
-                else if (line.Trim().ToLower().CompareTo("top") == 0)
+                else if (line.CompareTo("top") == 0)
                 {
-                    klasirane scoreboard = klasirane.GetInstance();
-                    scoreboard.sort();
+                    ScoreBoard scoreboard = ScoreBoard.GetInstance();
+                    scoreboard.SortScoreBoard();
                 }
-                else if (line.Trim().ToLower().CompareTo("restart") == 0)
+                else if (line.CompareTo("restart") == 0)
                 {
                     Console.WriteLine();
                     break;
                 }
-                else if (line.Trim().ToLower().CompareTo("exit") == 0)
+                else if (line.CompareTo("exit") == 0)
                 {
                     flag1 = true;
                     Console.WriteLine(EXIT_GAME);
@@ -126,18 +126,18 @@ class BullsAndCows
 
                 int count3 = 0;
                 int count4 = 0;
-                if (!ProccessGues(line.Trim(), out count3, out count4))
+                if (!ProccessGuess(line, out count3, out count4))
                 {
                     Console.WriteLine(WRONG_INPUT);
                     continue;
                 }
                 count1++;
-                if (count3 == NUMBER_OF_DIGITS)
+                if (count3 == DigitsNumber)
                 {
                     Console.WriteLine(count2 == 0 ? "Congratulations! You guessed the secret number in {0} attempts and {1} cheats." : "Congratulations! You guessed the secret number in {0} attempts.", count1, count2);
                     Console.WriteLine(new string('-', 80));
 
-                    klasirane scoreBoard = klasirane.GetInstance();
+                    ScoreBoard scoreBoard = ScoreBoard.GetInstance();
                     if (count2 == 0 && scoreBoard.IsHighScore(count1))
                     {
                         Console.WriteLine(IN_SCOREBOARD);
@@ -148,7 +148,7 @@ class BullsAndCows
                     {
                         Console.WriteLine(OUT_SCOREBOARD);
                     }
-                    scoreBoard.sort();
+                    scoreBoard.SortScoreBoard();
                     break;
                 }
                 else
