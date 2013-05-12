@@ -12,19 +12,16 @@ class BullsAndCows
     private const string ENTER_GUES = "Enter your guess or command: ";
     private const string HELP = "The number looks like";
     private const string HELP_UNAVAILABLE = "You cannot use more help.";
-    private const string WRONG_GUES = "Wrong number! ";
-    private const string WRONG_INPUT = "Wrong input format! ";
     private const string IN_SCOREBOARD = "Please enter your name for the top scoreboard: ";
     private const string OUT_SCOREBOARD = "You are not allowed to enter the top scoreboard.";
-    private const string EXIT_GAME = "Good bye!";
 
-    private Random r;
+    private Random randomDigit;
     private List<int> digits;
     private char[] helpExpression;
 
     public BullsAndCows()
     {
-        this.r = new Random();
+        this.randomDigit = new Random();
         SetDigits();
     }
 
@@ -33,7 +30,7 @@ class BullsAndCows
         this.digits = new List<int>();
         for (int index = 0; index < DigitsNumber; index++)
         {
-            digits.Add(r.Next(0, 10));
+            digits.Add(randomDigit.Next(0, 10));
         }
         this.helpExpression = new char[DigitsNumber];
         for (int index = 0; index < DigitsNumber; index++)
@@ -46,12 +43,14 @@ class BullsAndCows
     {
         bulls = 0;
         cows = 0;
+
         if (guess.Length != DigitsNumber)
         {
             return false;
         }
 
         int[] guestedDigits = new int[DigitsNumber];
+
         for (int index = 0; index < DigitsNumber; index++)
         {
             if (!int.TryParse(guess[index].ToString(), out guestedDigits[index]))
@@ -73,10 +72,10 @@ class BullsAndCows
 
     private string Help()
     {
-        int helpPosition = this.r.Next(DigitsNumber);
+        int helpPosition = this.randomDigit.Next(DigitsNumber);
         while (this.helpExpression[helpPosition] != 'X')
         {
-            helpPosition = this.r.Next(DigitsNumber);
+            helpPosition = this.randomDigit.Next(DigitsNumber);
         }
         this.helpExpression[helpPosition] = char.Parse(this.digits[helpPosition].ToString());
         return new string(this.helpExpression);
@@ -86,7 +85,7 @@ class BullsAndCows
     {
         while (true)
         {
-            bool flag1 = false;
+            bool endGame = false;
             int count2 = 0;
             int count1 = 0;
             Console.WriteLine(START_EXPRESSION);
@@ -102,6 +101,7 @@ class BullsAndCows
                         Console.WriteLine(HELP_UNAVAILABLE);
                         continue;
                     }
+
                     count2++;
                     string helpExpression = Help();
                     Console.WriteLine("{0} {1}", HELP, helpExpression);
@@ -119,8 +119,8 @@ class BullsAndCows
                 }
                 else if (line.CompareTo("exit") == 0)
                 {
-                    flag1 = true;
-                    Console.WriteLine(EXIT_GAME);
+                    endGame = true;
+                    Console.WriteLine("Good bye!");
                     break;
                 }
 
@@ -128,7 +128,7 @@ class BullsAndCows
                 int count4 = 0;
                 if (!ProccessGuess(line, out count3, out count4))
                 {
-                    Console.WriteLine(WRONG_INPUT);
+                    Console.WriteLine("Wrong input format!");
                     continue;
                 }
                 count1++;
@@ -153,12 +153,12 @@ class BullsAndCows
                 }
                 else
                 {
-                    Console.WriteLine("{0} Bulls: {1}, Cows: {2}", WRONG_GUES, count3, count4);
+                    Console.WriteLine("Wrong number! Bulls: {1}, Cows: {2}", count3, count4);
                 }
             }
             while (true);
 
-            if (flag1)
+            if (endGame)
             {
                 break;
             }
