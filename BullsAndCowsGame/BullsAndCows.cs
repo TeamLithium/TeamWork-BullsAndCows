@@ -84,11 +84,6 @@ namespace BullsAndCows
             {
                 this.helpDigits[index] = 'X';
             }
-
-            for (int index = 0; index < DigitsNumber; index++)
-            {
-                Console.WriteLine(this.digits[index]);
-            }
         }
 
         private bool IsGuessCorrect(string guess, out int bulls, out int cows)
