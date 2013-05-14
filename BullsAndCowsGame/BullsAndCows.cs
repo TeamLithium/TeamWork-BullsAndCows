@@ -136,48 +136,53 @@ class BullsAndCows
             }
             else
             {
-                int bullsCount = 0;
-                int cowsCount = 0;
-
-                if (!ProccessGuess(inputLine, out bullsCount, out cowsCount))
-                {
-                    Console.WriteLine("Wrong input format!");
-                }
-                else
-                {
-                    atemptsCount++;
-
-                    if (bullsCount == DigitsNumber)
-                    {
-                        Console.WriteLine(helpCount == 0 ? "Congratulations! You guessed the secret number in {0} attempts and {1} cheats."
-                            : "Congratulations! You guessed the secret number in {0} attempts.", atemptsCount, helpCount);
-                        Console.WriteLine(new string('-', 80));
-
-                        ScoreBoard scoreBoard = ScoreBoard.GetInstance();
-                        if (helpCount == 0 && scoreBoard.IsHighScore(atemptsCount))
-                        {
-                            Console.WriteLine(IN_SCOREBOARD);
-
-                            string name = Console.ReadLine();
-                            scoreBoard.Add(name, atemptsCount);
-                        }
-                        else
-                        {
-                            Console.WriteLine(OUT_SCOREBOARD);
-                        }
-
-                        scoreBoard.SortScoreBoard();
-
-                        isGameRunning = false;
-                    }
-                    else
-                    {
-                        Console.WriteLine("Wrong number! Bulls: {0}, Cows: {1}", bullsCount, cowsCount);
-                    }
-                }
+                ManageNumbersCommand(ref isGameRunning, helpCount, ref atemptsCount, inputLine);
             }
         }
         while (isGameRunning);
+    }
+
+    private void ManageNumbersCommand(ref bool isGameRunning, int helpCount, ref int atemptsCount, string inputLine)
+    {
+        int bullsCount = 0;
+        int cowsCount = 0;
+
+        if (!ProccessGuess(inputLine, out bullsCount, out cowsCount))
+        {
+            Console.WriteLine("Wrong input format!");
+        }
+        else
+        {
+            atemptsCount++;
+
+            if (bullsCount == DigitsNumber)
+            {
+                Console.WriteLine(helpCount == 0 ? "Congratulations! You guessed the secret number in {0} attempts and {1} cheats."
+                    : "Congratulations! You guessed the secret number in {0} attempts.", atemptsCount, helpCount);
+                Console.WriteLine(new string('-', 80));
+
+                ScoreBoard scoreBoard = ScoreBoard.GetInstance();
+                if (helpCount == 0 && scoreBoard.IsHighScore(atemptsCount))
+                {
+                    Console.WriteLine(IN_SCOREBOARD);
+
+                    string name = Console.ReadLine();
+                    scoreBoard.Add(name, atemptsCount);
+                }
+                else
+                {
+                    Console.WriteLine(OUT_SCOREBOARD);
+                }
+
+                scoreBoard.SortScoreBoard();
+
+                isGameRunning = false;
+            }
+            else
+            {
+                Console.WriteLine("Wrong number! Bulls: {0}, Cows: {1}", bullsCount, cowsCount);
+            }
+        }
     }
 
     public static void Main()
