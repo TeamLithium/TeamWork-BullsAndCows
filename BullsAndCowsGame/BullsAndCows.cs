@@ -21,9 +21,9 @@ namespace BullsAndCows
 
         private Random randomDigit = new Random();
         private List<int> digits;
-        private char[] helpExpression;
+        private char[] helpDigits;
         private bool isGameRunning = true;
-        private int helpCount = 0;
+        private int helpUsedCount = 0;
         private int atemptsCount = 0;
 
         public BullsAndCows()
@@ -43,13 +43,13 @@ namespace BullsAndCows
 
                 if (inputLine.CompareTo("help") == 0)
                 {
-                    if (this.helpCount == DigitsNumber)
+                    if (this.helpUsedCount == DigitsNumber)
                     {
                         Console.WriteLine(HelpUnavailableText);
                     }
                     else
                     {
-                        this.helpCount++;
+                        this.helpUsedCount++;
 
                         Console.WriteLine("{0} {1}", HelpAvailableText, this.Help());
                     }
@@ -61,8 +61,8 @@ namespace BullsAndCows
                 }
                 else if (inputLine.CompareTo("restart") == 0)
                 {
-                    helpCount = 0;
-                    atemptsCount = 0;
+                    this.helpUsedCount = 0;
+                    this.atemptsCount = 0;
 
                     Console.WriteLine();
                     Console.WriteLine(new string('-', 80));
@@ -72,15 +72,15 @@ namespace BullsAndCows
                 }
                 else if (inputLine.CompareTo("exit") == 0)
                 {
-                    isGameRunning = false;
+                    this.isGameRunning = false;
                     Console.WriteLine("Good bye!");
                 }
                 else
                 {
-                    this.ManageNumbersCommand(ref isGameRunning, helpCount, ref atemptsCount, inputLine);
+                    this.ManageNumbersCommand(inputLine);
                 }
             }
-            while (isGameRunning);
+            while (this.isGameRunning);
         }
 
         private void SetDigits()
@@ -90,11 +90,11 @@ namespace BullsAndCows
                 this.digits.Add(this.randomDigit.Next(0, 10));
             }
 
-            this.helpExpression = new char[DigitsNumber];
+            this.helpDigits = new char[DigitsNumber];
 
             for (int index = 0; index < DigitsNumber; index++)
             {
-                this.helpExpression[index] = 'X';
+                this.helpDigits[index] = 'X';
             }
         }
 
@@ -134,17 +134,17 @@ namespace BullsAndCows
         {
             int helpPosition = this.randomDigit.Next(DigitsNumber);
 
-            while (this.helpExpression[helpPosition] != 'X')
+            while (this.helpDigits[helpPosition] != 'X')
             {
                 helpPosition = this.randomDigit.Next(DigitsNumber);
             }
 
-            this.helpExpression[helpPosition] = char.Parse(this.digits[helpPosition].ToString());
+            this.helpDigits[helpPosition] = char.Parse(this.digits[helpPosition].ToString());
 
-            return new string(this.helpExpression);
+            return new string(this.helpDigits);
         }
 
-        private void ManageNumbersCommand(ref bool isGameRunning, int helpCount, ref int atemptsCount, string inputLine)
+        private void ManageNumbersCommand(string inputLine)
         {
             int bullsCount = 0;
             int cowsCount = 0;
@@ -155,20 +155,20 @@ namespace BullsAndCows
             }
             else
             {
-                atemptsCount++;
+                this.atemptsCount++;
 
                 if (bullsCount == DigitsNumber)
                 {
-                    Console.WriteLine("Congratulations! You guessed the secret number in {0} attempts and {1} cheats.", atemptsCount, helpCount);
+                    Console.WriteLine("Congratulations! You guessed the secret number in {0} attempts and {1} cheats.", this.atemptsCount, this.helpUsedCount);
                     Console.WriteLine(new string('-', 80));
 
                     ScoreBoard scoreBoard = ScoreBoard.GetInstance();
-                    if (helpCount == 0 && scoreBoard.IsHighScore(atemptsCount))
+                    if (this.helpUsedCount == 0 && scoreBoard.IsHighScore(this.atemptsCount))
                     {
                         Console.WriteLine(ScoreBoardEnterAllowedText);
 
                         string name = Console.ReadLine();
-                        scoreBoard.Add(name, atemptsCount);
+                        scoreBoard.Add(name, this.atemptsCount);
                     }
                     else
                     {
@@ -177,7 +177,7 @@ namespace BullsAndCows
 
                     scoreBoard.PrintScoreBoard();
 
-                    isGameRunning = false;
+                    this.isGameRunning = false;
                 }
                 else
                 {
