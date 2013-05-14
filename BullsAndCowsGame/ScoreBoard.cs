@@ -9,22 +9,11 @@ namespace BullsAndCows
     public class ScoreBoard
     {
         private const int BoardSize = 5;
-        private static ScoreBoard scoreBoardInstance;
         private List<KeyValuePair<string, int>> highScores;
 
         public ScoreBoard()
         {
             this.highScores = new List<KeyValuePair<string, int>>();
-        }
-
-        public static ScoreBoard GetInstance()
-        {
-            if (scoreBoardInstance == null)
-            {
-                scoreBoardInstance = new ScoreBoard();
-            }
-
-            return scoreBoardInstance;
         }
 
         public bool IsHighScore(int attempts)

@@ -25,10 +25,12 @@ namespace BullsAndCows
         private bool isGameRunning = true;
         private int helpUsedCount;
         private int atemptsCount;
+        private ScoreBoard scoreBoard;
 
         public BullsAndCows()
         {
             this.digits = new List<int>();
+            this.scoreBoard = new ScoreBoard();
         }
 
         public void StartGame()
@@ -49,8 +51,7 @@ namespace BullsAndCows
                 }
                 else if (inputLine.CompareTo("top") == 0)
                 {
-                    ScoreBoard scoreboard = ScoreBoard.GetInstance();
-                    scoreboard.PrintScoreBoard();
+                    scoreBoard.PrintScoreBoard();
                 }
                 else if (inputLine.CompareTo("restart") == 0)
                 {
@@ -155,7 +156,6 @@ namespace BullsAndCows
                         this.atemptsCount, this.helpUsedCount);
                     Console.WriteLine(new string('-', 80));
 
-                    ScoreBoard scoreBoard = ScoreBoard.GetInstance();
                     if (this.helpUsedCount == 0 && scoreBoard.IsHighScore(this.atemptsCount))
                     {
                         Console.WriteLine(ScoreBoardEnterAllowedText);
