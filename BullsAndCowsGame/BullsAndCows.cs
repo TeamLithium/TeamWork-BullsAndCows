@@ -19,13 +19,13 @@ namespace BullsAndCows
         private const string ScoreBoardEnterAllowedText = "Please enter your name for the top scoreboard: ";
         private const string ScoreBoardEnterUnallowedText = "You are not allowed to enter the top scoreboard.";
 
-        private Random randomDigit;
+        private Random randomDigit = new Random();
         private List<int> digits;
         private char[] helpExpression;
 
         public BullsAndCows()
         {
-            this.randomDigit = new Random();
+            this.digits = new List<int>();
         }
 
         public void StartGame()
@@ -86,8 +86,6 @@ namespace BullsAndCows
 
         private void SetDigits()
         {
-            this.digits = new List<int>();
-
             for (int index = 0; index < DigitsNumber; index++)
             {
                 this.digits.Add(this.randomDigit.Next(0, 10));
