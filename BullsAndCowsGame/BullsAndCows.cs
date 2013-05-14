@@ -133,6 +133,7 @@ namespace BullsAndCows
                 }
                 while (this.helpDigits[helpPosition] != 'X');
 
+
                 this.helpDigits[helpPosition] = char.Parse(this.digits[helpPosition].ToString());
                 this.helpUsedCount++;
 
