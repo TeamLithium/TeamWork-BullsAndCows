@@ -45,15 +45,7 @@ namespace BullsAndCows
 
                 if (inputLine.CompareTo("help") == 0)
                 {
-                    if (this.helpUsedCount == DigitsNumber)
-                    {
-                        Console.WriteLine(HelpUnavailableText);
-                    }
-                    else
-                    {
-                        this.helpUsedCount++;
-                        Console.WriteLine("{0} {1}", HelpAvailableText, this.Help());
-                    }
+                    this.Help();
                 }
                 else if (inputLine.CompareTo("top") == 0)
                 {
@@ -93,7 +85,7 @@ namespace BullsAndCows
             }
         }
 
-        private bool IsCorrectGuess(string guess, out int bulls, out int cows)
+        private bool IsGuessCorrect(string guess, out int bulls, out int cows)
         {
             bulls = 0;
             cows = 0;
@@ -125,18 +117,27 @@ namespace BullsAndCows
             return true;
         }
 
-        private string Help()
+        private void Help()
         {
-            int helpPosition = this.randomDigit.Next(DigitsNumber);
-
-            while (this.helpDigits[helpPosition] != 'X')
+            if (this.helpUsedCount == DigitsNumber)
             {
-                helpPosition = this.randomDigit.Next(DigitsNumber);
+                Console.WriteLine(HelpUnavailableText);
             }
+            else
+            {
+                int helpPosition;
 
-            this.helpDigits[helpPosition] = char.Parse(this.digits[helpPosition].ToString());
+                do
+                {
+                    helpPosition = this.randomDigit.Next(DigitsNumber);
+                }
+                while (this.helpDigits[helpPosition] != 'X');
 
-            return new string(this.helpDigits);
+                this.helpDigits[helpPosition] = char.Parse(this.digits[helpPosition].ToString());
+                this.helpUsedCount++;
+
+                Console.WriteLine("{0} {1}", HelpAvailableText, new string(this.helpDigits));
+            }
         }
 
         private void ManageNumbersCommand(string inputLine)
@@ -144,7 +145,7 @@ namespace BullsAndCows
             int bullsCount = 0;
             int cowsCount = 0;
 
-            if (this.IsCorrectGuess(inputLine, out bullsCount, out cowsCount))
+            if (this.IsGuessCorrect(inputLine, out bullsCount, out cowsCount))
             {
                 this.atemptsCount++;
 
