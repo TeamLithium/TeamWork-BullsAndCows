@@ -11,7 +11,7 @@ namespace BullsAndCows
         private const int DigitsNumber = 4;
         private const string StartText = "Welcome to “Bulls and Cows” game.Please try to guess my secret 4-digit number.\n" +
                                                 "Use 'top' to view the top scoreboard, 'restart' to start a new game\n" +
-                                                "and 'help' to cheat and 'exit' to quit the game.";
+                                                "and 'help' to cheat and 'exit' to quit the game.\n";
 
         private const string EnterGuessText = "Enter your guess or command: ";
         private const string HelpAvailableText = "The number looks like";
@@ -34,7 +34,7 @@ namespace BullsAndCows
         public void StartGame()
         {
             Console.WriteLine(StartText);
-            this.SetDigits();
+            this.CreateRandomDigits();
 
             do
             {
@@ -50,7 +50,6 @@ namespace BullsAndCows
                     else
                     {
                         this.helpUsedCount++;
-
                         Console.WriteLine("{0} {1}", HelpAvailableText, this.Help());
                     }
                 }
@@ -61,14 +60,8 @@ namespace BullsAndCows
                 }
                 else if (inputLine.CompareTo("restart") == 0)
                 {
-                    this.helpUsedCount = 0;
-                    this.atemptsCount = 0;
-
-                    Console.WriteLine();
-                    Console.WriteLine(new string('-', 80));
-                    Console.WriteLine(StartText);
-
-                    this.SetDigits();
+                    Console.Clear();
+                    this.StartGame();
                 }
                 else if (inputLine.CompareTo("exit") == 0)
                 {
@@ -83,7 +76,7 @@ namespace BullsAndCows
             while (this.isGameRunning);
         }
 
-        private void SetDigits()
+        private void CreateRandomDigits()
         {
             for (int index = 0; index < DigitsNumber; index++)
             {
@@ -98,7 +91,7 @@ namespace BullsAndCows
             }
         }
 
-        private bool ProccessGuess(string guess, out int bulls, out int cows)
+        private bool IsCorrectGuess(string guess, out int bulls, out int cows)
         {
             bulls = 0;
             cows = 0;
@@ -149,11 +142,7 @@ namespace BullsAndCows
             int bullsCount = 0;
             int cowsCount = 0;
 
-            if (!this.ProccessGuess(inputLine, out bullsCount, out cowsCount))
-            {
-                Console.WriteLine("Wrong input format!");
-            }
-            else
+            if (this.IsCorrectGuess(inputLine, out bullsCount, out cowsCount))
             {
                 this.atemptsCount++;
 
@@ -181,8 +170,12 @@ namespace BullsAndCows
                 }
                 else
                 {
-                    Console.WriteLine("Wrong number! Bulls: {0}, Cows: {1}", bullsCount, cowsCount);
-                }
+                    Console.WriteLine("Wrong number! Bulls: {0}, Cows: {1}\n", bullsCount, cowsCount);
+                }                
+            }
+            else
+            {
+                Console.WriteLine("Wrong input format!\n");
             }
         }
     }
