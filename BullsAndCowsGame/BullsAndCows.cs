@@ -43,13 +43,13 @@ namespace BullsAndCows
 
                 if (inputLine.CompareTo("help") == 0)
                 {
-                    if (helpCount == DigitsNumber)
+                    if (this.helpCount == DigitsNumber)
                     {
                         Console.WriteLine(HelpUnavailableText);
                     }
                     else
                     {
-                        helpCount++;
+                        this.helpCount++;
 
                         Console.WriteLine("{0} {1}", HelpAvailableText, this.Help());
                     }
