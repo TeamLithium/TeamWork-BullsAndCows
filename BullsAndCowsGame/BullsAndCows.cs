@@ -51,7 +51,7 @@ namespace BullsAndCows
                 }
                 else if (inputLine.CompareTo("top") == 0)
                 {
-                    scoreBoard.PrintScoreBoard();
+                    Console.WriteLine(this.scoreBoard);
                 }
                 else if (inputLine.CompareTo("restart") == 0)
                 {
@@ -83,6 +83,11 @@ namespace BullsAndCows
             for (int index = 0; index < DigitsNumber; index++)
             {
                 this.helpDigits[index] = 'X';
+            }
+
+            for (int index = 0; index < DigitsNumber; index++)
+            {
+                Console.WriteLine(this.digits[index]);
             }
         }
 
@@ -152,23 +157,22 @@ namespace BullsAndCows
 
                 if (bullsCount == DigitsNumber)
                 {
-                    Console.WriteLine("Congratulations! You guessed the secret number in {0} attempts and {1} cheats.", 
-                        this.atemptsCount, this.helpUsedCount);
+                    Console.WriteLine("Congratulations! You guessed the secret number in {0} attempts and {1} cheats.", this.atemptsCount, this.helpUsedCount);
                     Console.WriteLine(new string('-', 80));
 
-                    if (this.helpUsedCount == 0 && scoreBoard.IsHighScore(this.atemptsCount))
+                    if (this.helpUsedCount == 0 && this.scoreBoard.IsHighScore(this.atemptsCount))
                     {
                         Console.WriteLine(ScoreBoardEnterAllowedText);
 
                         string name = Console.ReadLine();
-                        scoreBoard.Add(name, this.atemptsCount);
+                        this.scoreBoard.Add(name, this.atemptsCount);
                     }
                     else
                     {
                         Console.WriteLine(ScoreBoardEnterUnallowedText);
                     }
 
-                    scoreBoard.PrintScoreBoard();
+                    Console.WriteLine(this.scoreBoard);
 
                     this.isGameRunning = false;
                 }

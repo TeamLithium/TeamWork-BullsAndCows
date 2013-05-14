@@ -5,6 +5,7 @@ namespace BullsAndCows
     using System;
     using System.Collections.Generic;
     using System.Linq;
+    using System.Text;
 
     public class ScoreBoard
     {
@@ -38,25 +39,29 @@ namespace BullsAndCows
             }
         }
 
-        public void PrintScoreBoard()
+        public override string ToString()
         {
+            StringBuilder scoreBoardAsString = new StringBuilder();
+
             if (this.highScores.Count == 0)
             {
-                Console.WriteLine("Scoreboard empty! \r\n");
+                scoreBoardAsString.AppendLine("Scoreboard empty! \r\n");
             }
             else
             {
-                Console.WriteLine("Scoreboard:");
+                scoreBoardAsString.AppendLine("Scoreboard:");
 
                 for (int index = 0; index < this.highScores.Count; index++)
                 {
                     string name = this.highScores[index].Key;
                     int attempts = this.highScores[index].Value;
-                    Console.WriteLine("{0}. {1} --> {2} guesses", index + 1, name, attempts);
+                    scoreBoardAsString.AppendFormat("{0}. {1} --> {2} guesses", index + 1, name, attempts);
                 }
 
-                Console.WriteLine();
+                scoreBoardAsString.AppendLine();
             }
+
+            return scoreBoardAsString.ToString();
         }
 
         private void Sort()
