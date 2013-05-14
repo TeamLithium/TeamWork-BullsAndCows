@@ -1,191 +1,192 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿[module: System.Diagnostics.CodeAnalysis.SuppressMessage("StyleCop.CSharp.DocumentationRules", "*", Justification = "Reviewed. Suppression is OK here.")]
 
-class BullsAndCows
+namespace BullsAndCows
 {
-    private const int DIGITS_NUMBER = 4;
-    private const string START_TEXT = "Welcome to “Bulls and Cows” game.Please try to guess my secret 4-digit number.\n" +
-                                            "Use 'top' to view the top scoreboard, 'restart' to start a new game\n" +
-                                            "and 'help' to cheat and 'exit' to quit the game.";
-    private const string ENTER_GUESS_TEXT = "Enter your guess or command: ";
-    private const string HELP_TEXT = "The number looks like";
-    private const string HELP_UNAVAILABLE_TEXT = "You cannot use more help.";
-    private const string SCOREBOARD_ALLOWED_TEXT = "Please enter your name for the top scoreboard: ";
-    private const string SCOREBOARD_UNALLOWED_TEXT = "You are not allowed to enter the top scoreboard.";
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
 
-    private Random randomDigit;
-    private List<int> digits;
-    private char[] helpExpression;
-
-    public BullsAndCows()
+    public class BullsAndCows
     {
-        this.randomDigit = new Random();
-    }
+        private const int DigitsNumber = 4;
+        private const string StartText = "Welcome to “Bulls and Cows” game.Please try to guess my secret 4-digit number.\n" +
+                                                "Use 'top' to view the top scoreboard, 'restart' to start a new game\n" +
+                                                "and 'help' to cheat and 'exit' to quit the game.";
 
-    private void SetDigits()
-    {
-        this.digits = new List<int>();
+        private const string EnterGuessText = "Enter your guess or command: ";
+        private const string HelpAvailableText = "The number looks like";
+        private const string HelpUnavailableText = "You cannot use more help.";
+        private const string ScoreBoardEnterAllowedText = "Please enter your name for the top scoreboard: ";
+        private const string ScoreBoardEnterUnallowedText = "You are not allowed to enter the top scoreboard.";
 
-        for (int index = 0; index < DIGITS_NUMBER; index++)
+        private Random randomDigit;
+        private List<int> digits;
+        private char[] helpExpression;
+
+        public BullsAndCows()
         {
-            digits.Add(randomDigit.Next(0, 10));
+            this.randomDigit = new Random();
         }
 
-        this.helpExpression = new char[DIGITS_NUMBER];
-
-        for (int index = 0; index < DIGITS_NUMBER; index++)
+        public void StartGame()
         {
-            helpExpression[index] = 'X';
+            bool isGameRunning = true;
+            int helpCount = 0;
+            int atemptsCount = 0;
+
+            Console.WriteLine(StartText);
+            this.SetDigits();
+
+            do
+            {
+                Console.WriteLine(EnterGuessText);
+                string inputLine = Console.ReadLine().Trim().ToLower();
+
+                if (inputLine.CompareTo("help") == 0)
+                {
+                    if (helpCount == DigitsNumber)
+                    {
+                        Console.WriteLine(HelpUnavailableText);
+                    }
+                    else
+                    {
+                        helpCount++;
+
+                        Console.WriteLine("{0} {1}", HelpAvailableText, this.Help());
+                    }
+                }
+                else if (inputLine.CompareTo("top") == 0)
+                {
+                    ScoreBoard scoreboard = ScoreBoard.GetInstance();
+                    scoreboard.PrintScoreBoard();
+                }
+                else if (inputLine.CompareTo("restart") == 0)
+                {
+                    helpCount = 0;
+                    atemptsCount = 0;
+
+                    Console.WriteLine();
+                    Console.WriteLine(new string('-', 80));
+                    Console.WriteLine(StartText);
+
+                    this.SetDigits();
+                }
+                else if (inputLine.CompareTo("exit") == 0)
+                {
+                    isGameRunning = false;
+                    Console.WriteLine("Good bye!");
+                }
+                else
+                {
+                    this.ManageNumbersCommand(ref isGameRunning, helpCount, ref atemptsCount, inputLine);
+                }
+            }
+            while (isGameRunning);
         }
-    }
 
-    private bool ProccessGuess(string guess, out int bulls, out int cows)
-    {
-        bulls = 0;
-        cows = 0;
-
-        if (guess.Length != DIGITS_NUMBER)
+        private void SetDigits()
         {
-            return false;
+            this.digits = new List<int>();
+
+            for (int index = 0; index < DigitsNumber; index++)
+            {
+                this.digits.Add(this.randomDigit.Next(0, 10));
+            }
+
+            this.helpExpression = new char[DigitsNumber];
+
+            for (int index = 0; index < DigitsNumber; index++)
+            {
+                this.helpExpression[index] = 'X';
+            }
         }
 
-        int[] guessedDigits = new int[DIGITS_NUMBER];
-
-        for (int index = 0; index < DIGITS_NUMBER; index++)
+        private bool ProccessGuess(string guess, out int bulls, out int cows)
         {
-            if (!int.TryParse(guess[index].ToString(), out guessedDigits[index]))
+            bulls = 0;
+            cows = 0;
+
+            if (guess.Length != DigitsNumber)
             {
                 return false;
             }
 
-            if (guessedDigits[index] == this.digits[index])
+            int[] guessedDigits = new int[DigitsNumber];
+
+            for (int index = 0; index < DigitsNumber; index++)
             {
-                bulls++;
-            }
-            else if (this.digits.Contains(guessedDigits[index]))
-            {
-                cows++;
-            }
-        }
-
-        return true;
-    }
-
-    private string Help()
-    {
-        int helpPosition = this.randomDigit.Next(DIGITS_NUMBER);
-
-        while (this.helpExpression[helpPosition] != 'X')
-        {
-            helpPosition = this.randomDigit.Next(DIGITS_NUMBER);
-        }
-        this.helpExpression[helpPosition] = char.Parse(this.digits[helpPosition].ToString());
-
-        return new string(this.helpExpression);
-    }
-
-    public void StartGame()
-    {
-        bool isGameRunning = true;
-        int helpCount = 0;
-        int atemptsCount = 0;
-
-        Console.WriteLine(START_TEXT);
-        SetDigits();
-
-        do
-        {
-            Console.WriteLine(ENTER_GUESS_TEXT);
-            string inputLine = Console.ReadLine().Trim().ToLower();
-
-            if (inputLine.CompareTo("help") == 0)
-            {
-                if (helpCount == DIGITS_NUMBER)
+                if (!int.TryParse(guess[index].ToString(), out guessedDigits[index]))
                 {
-                    Console.WriteLine(HELP_UNAVAILABLE_TEXT);
+                    return false;
                 }
-                else
-                {
-                    helpCount++;
 
-                    Console.WriteLine("{0} {1}", HELP_TEXT, Help());
+                if (guessedDigits[index] == this.digits[index])
+                {
+                    bulls++;
+                }
+                else if (this.digits.Contains(guessedDigits[index]))
+                {
+                    cows++;
                 }
             }
-            else if (inputLine.CompareTo("top") == 0)
-            {
-                ScoreBoard scoreboard = ScoreBoard.GetInstance();
-                scoreboard.PrintScoreBoard();
-            }
-            else if (inputLine.CompareTo("restart") == 0)
-            {
-                helpCount = 0;
-                atemptsCount = 0;
 
-                Console.WriteLine();
-                Console.WriteLine(new string('-', 80));
-                Console.WriteLine(START_TEXT);
+            return true;
+        }
 
-                SetDigits();
-            }
-            else if (inputLine.CompareTo("exit") == 0)
+        private string Help()
+        {
+            int helpPosition = this.randomDigit.Next(DigitsNumber);
+
+            while (this.helpExpression[helpPosition] != 'X')
             {
-                isGameRunning = false;
-                Console.WriteLine("Good bye!");
+                helpPosition = this.randomDigit.Next(DigitsNumber);
+            }
+
+            this.helpExpression[helpPosition] = char.Parse(this.digits[helpPosition].ToString());
+
+            return new string(this.helpExpression);
+        }
+
+        private void ManageNumbersCommand(ref bool isGameRunning, int helpCount, ref int atemptsCount, string inputLine)
+        {
+            int bullsCount = 0;
+            int cowsCount = 0;
+
+            if (!this.ProccessGuess(inputLine, out bullsCount, out cowsCount))
+            {
+                Console.WriteLine("Wrong input format!");
             }
             else
             {
-                ManageNumbersCommand(ref isGameRunning, helpCount, ref atemptsCount, inputLine);
-            }
-        }
-        while (isGameRunning);
-    }
+                atemptsCount++;
 
-    private void ManageNumbersCommand(ref bool isGameRunning, int helpCount, ref int atemptsCount, string inputLine)
-    {
-        int bullsCount = 0;
-        int cowsCount = 0;
-
-        if (!ProccessGuess(inputLine, out bullsCount, out cowsCount))
-        {
-            Console.WriteLine("Wrong input format!");
-        }
-        else
-        {
-            atemptsCount++;
-
-            if (bullsCount == DIGITS_NUMBER)
-            {
-                Console.WriteLine("Congratulations! You guessed the secret number in {0} attempts and {1} cheats.", atemptsCount, helpCount);
-                Console.WriteLine(new string('-', 80));
-
-                ScoreBoard scoreBoard = ScoreBoard.GetInstance();
-                if (helpCount == 0 && scoreBoard.IsHighScore(atemptsCount))
+                if (bullsCount == DigitsNumber)
                 {
-                    Console.WriteLine(SCOREBOARD_ALLOWED_TEXT);
+                    Console.WriteLine("Congratulations! You guessed the secret number in {0} attempts and {1} cheats.", atemptsCount, helpCount);
+                    Console.WriteLine(new string('-', 80));
 
-                    string name = Console.ReadLine();
-                    scoreBoard.Add(name, atemptsCount);
+                    ScoreBoard scoreBoard = ScoreBoard.GetInstance();
+                    if (helpCount == 0 && scoreBoard.IsHighScore(atemptsCount))
+                    {
+                        Console.WriteLine(ScoreBoardEnterAllowedText);
+
+                        string name = Console.ReadLine();
+                        scoreBoard.Add(name, atemptsCount);
+                    }
+                    else
+                    {
+                        Console.WriteLine(ScoreBoardEnterUnallowedText);
+                    }
+
+                    scoreBoard.PrintScoreBoard();
+
+                    isGameRunning = false;
                 }
                 else
                 {
-                    Console.WriteLine(SCOREBOARD_UNALLOWED_TEXT);
+                    Console.WriteLine("Wrong number! Bulls: {0}, Cows: {1}", bullsCount, cowsCount);
                 }
-
-                scoreBoard.PrintScoreBoard();
-
-                isGameRunning = false;
-            }
-            else
-            {
-                Console.WriteLine("Wrong number! Bulls: {0}, Cows: {1}", bullsCount, cowsCount);
             }
         }
-    }
-
-    public static void Main()
-    {
-        BullsAndCows newGame = new BullsAndCows();
-        newGame.StartGame();
     }
 }
