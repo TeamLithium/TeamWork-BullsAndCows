@@ -157,8 +157,7 @@ class BullsAndCows
 
             if (bullsCount == DigitsNumber)
             {
-                Console.WriteLine(helpCount == 0 ? "Congratulations! You guessed the secret number in {0} attempts and {1} cheats."
-                    : "Congratulations! You guessed the secret number in {0} attempts.", atemptsCount, helpCount);
+                Console.WriteLine("Congratulations! You guessed the secret number in {0} attempts and {1} cheats.", atemptsCount, helpCount);
                 Console.WriteLine(new string('-', 80));
 
                 ScoreBoard scoreBoard = ScoreBoard.GetInstance();
