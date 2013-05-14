@@ -22,6 +22,9 @@ namespace BullsAndCows
         private Random randomDigit;
         private List<int> digits;
         private char[] helpExpression;
+        private bool isGameRunning = true;
+        private int helpCount = 0;
+        private int atemptsCount = 0;
 
         public BullsAndCows()
         {
@@ -30,10 +33,6 @@ namespace BullsAndCows
 
         public void StartGame()
         {
-            bool isGameRunning = true;
-            int helpCount = 0;
-            int atemptsCount = 0;
-
             Console.WriteLine(StartText);
             this.SetDigits();
 
