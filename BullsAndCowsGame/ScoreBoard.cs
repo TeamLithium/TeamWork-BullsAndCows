@@ -4,23 +4,23 @@ using System.Linq;
 
 public class ScoreBoard
 {
-    private const int BoardSize = 5;
+    private const int BOARD_SIZE = 5;
     private static ScoreBoard scoreBoardInstance;
-    private List<KeyValuePair<string, int>> score;
+    private List<KeyValuePair<string, int>> highScores;
 
     private ScoreBoard()
     {
-        this.score = new List<KeyValuePair<string, int>>();
+        this.highScores = new List<KeyValuePair<string, int>>();
     }
 
     private void Sort()
     {
-        this.score.Sort(new Comparison<KeyValuePair<string, int>>((first, second) => second.Value.CompareTo(first.Value)));
+        this.highScores.Sort(new Comparison<KeyValuePair<string, int>>((first, second) => second.Value.CompareTo(first.Value)));
     }
 
     public bool IsHighScore(int attempts)
     {
-        if (this.score.Count < BoardSize || this.score.Last().Value < attempts)
+        if (this.highScores.Count < BOARD_SIZE || this.highScores.Last().Value < attempts)
         {
             return true;
         }
@@ -40,33 +40,34 @@ public class ScoreBoard
 
     public void Add(string name, int attempts)
     {
-        this.score.Add(new KeyValuePair<string, int>(name, attempts));
+        this.highScores.Add(new KeyValuePair<string, int>(name, attempts));
+
         this.Sort();
-        if (this.score.Count > BoardSize)
+        
+        if (this.highScores.Count > BOARD_SIZE)
         {
-            this.score.RemoveAt(this.score.Count - 1);
+            this.highScores.RemoveAt(this.highScores.Count - 1);
         }
     }
 
     public void PrintScoreBoard()
     {
-        if (this.score.Count == 0)
+        if (this.highScores.Count == 0)
         {
-            Console.WriteLine("Scoreboard empty!");
+            Console.WriteLine("Scoreboard empty! \r\n");
+        }
+        else
+        {
+            Console.WriteLine("Scoreboard:");
+
+            for (int index = 0; index < this.highScores.Count; index++)
+            {
+                string name = this.highScores[index].Key;
+                int attempts = this.highScores[index].Value;
+                Console.WriteLine("{0}. {1} --> {2} guesses", index + 1, name, attempts);
+            }
+
             Console.WriteLine();
-            return;
         }
-
-        this.Sort();
-        Console.WriteLine("Scoreboard:");
-
-        for (int index = 0; index < this.score.Count; index++)
-        {
-            string name = this.score[index].Key;
-            int attempts = this.score[index].Value;
-            Console.WriteLine("{0}. {1} --> {2} guesses", index + 1, name, attempts);
-        }
-
-        Console.WriteLine();
     }
 }
