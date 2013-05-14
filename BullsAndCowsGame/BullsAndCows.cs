@@ -168,8 +168,7 @@ namespace BullsAndCows
                     }
 
                     Console.WriteLine(this.scoreBoard);
-
-                    this.isGameRunning = false;
+                    this.StartGame();
                 }
                 else
                 {

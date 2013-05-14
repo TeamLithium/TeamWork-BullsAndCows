@@ -56,6 +56,7 @@ namespace BullsAndCows
                     string name = this.highScores[index].Key;
                     int attempts = this.highScores[index].Value;
                     scoreBoardAsString.AppendFormat("{0}. {1} --> {2} guesses", index + 1, name, attempts);
+                    scoreBoardAsString.AppendLine();
                 }
 
                 scoreBoardAsString.AppendLine();
@@ -66,7 +67,7 @@ namespace BullsAndCows
 
         private void Sort()
         {
-            this.highScores.Sort(new Comparison<KeyValuePair<string, int>>((first, second) => second.Value.CompareTo(first.Value)));
+            this.highScores.Sort(new Comparison<KeyValuePair<string, int>>((first, second) => first.Value.CompareTo(second.Value)));
         }
     }
 }
