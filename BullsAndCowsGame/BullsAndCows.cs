@@ -45,7 +45,7 @@ namespace BullsAndCows
 
                 if (inputLine.CompareTo("help") == 0)
                 {
-                    this.Help();
+                    this.RevealRandomDigit();
                 }
                 else if (inputLine.CompareTo("top") == 0)
                 {
@@ -117,7 +117,7 @@ namespace BullsAndCows
             return true;
         }
 
-        private void Help()
+        private void RevealRandomDigit()
         {
             if (this.helpUsedCount == DigitsNumber)
             {
@@ -132,7 +132,6 @@ namespace BullsAndCows
                     helpPosition = this.randomDigit.Next(DigitsNumber);
                 }
                 while (this.helpDigits[helpPosition] != 'X');
-
 
                 this.helpDigits[helpPosition] = char.Parse(this.digits[helpPosition].ToString());
                 this.helpUsedCount++;
@@ -152,7 +151,8 @@ namespace BullsAndCows
 
                 if (bullsCount == DigitsNumber)
                 {
-                    Console.WriteLine("Congratulations! You guessed the secret number in {0} attempts and {1} cheats.", this.atemptsCount, this.helpUsedCount);
+                    Console.WriteLine("Congratulations! You guessed the secret number in {0} attempts and {1} cheats.", 
+                        this.atemptsCount, this.helpUsedCount);
                     Console.WriteLine(new string('-', 80));
 
                     ScoreBoard scoreBoard = ScoreBoard.GetInstance();
