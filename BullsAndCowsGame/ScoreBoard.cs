@@ -4,7 +4,7 @@ using System.Linq;
 
 public class ScoreBoard
 {
-    private const int BoardSize = 5;
+    private const int boardSize = 5;
     private static ScoreBoard instance;
     private List<KeyValuePair<string, int>> score;
 
@@ -20,7 +20,7 @@ public class ScoreBoard
 
     public bool IsHighScore(int attempts)
     {
-        if (this.score.Count < BoardSize || this.score.Last().Value < attempts)
+        if (this.score.Count < boardSize || this.score.Last().Value < attempts)
         {
             return true;
         }
@@ -42,7 +42,7 @@ public class ScoreBoard
     {
         this.score.Add(new KeyValuePair<string, int>(name, attempts));
         Sort();
-        if (this.score.Count > BoardSize)
+        if (this.score.Count > boardSize)
         {
             this.score.RemoveAt(this.score.Count - 1);
         }
