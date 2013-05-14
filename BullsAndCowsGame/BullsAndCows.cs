@@ -23,8 +23,8 @@ namespace BullsAndCows
         private List<int> digits;
         private char[] helpDigits;
         private bool isGameRunning = true;
-        private int helpUsedCount = 0;
-        private int atemptsCount = 0;
+        private int helpUsedCount;
+        private int atemptsCount;
 
         public BullsAndCows()
         {
@@ -35,6 +35,8 @@ namespace BullsAndCows
         {
             Console.WriteLine(StartText);
             this.CreateRandomDigits();
+            this.helpUsedCount = 0;
+            this.atemptsCount = 0;
 
             do
             {
