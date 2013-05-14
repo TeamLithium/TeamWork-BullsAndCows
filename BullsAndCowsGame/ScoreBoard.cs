@@ -4,8 +4,8 @@ using System.Linq;
 
 public class ScoreBoard
 {
-    private const int boardSize = 5;
-    private static ScoreBoard instance;
+    private const int BoardSize = 5;
+    private static ScoreBoard scoreBoardInstance;
     private List<KeyValuePair<string, int>> score;
 
     private ScoreBoard()
@@ -20,7 +20,7 @@ public class ScoreBoard
 
     public bool IsHighScore(int attempts)
     {
-        if (this.score.Count < boardSize || this.score.Last().Value < attempts)
+        if (this.score.Count < BoardSize || this.score.Last().Value < attempts)
         {
             return true;
         }
@@ -30,25 +30,25 @@ public class ScoreBoard
 
     public static ScoreBoard GetInstance()
     {
-        if (instance == null)
+        if (scoreBoardInstance == null)
         {
-            instance = new ScoreBoard();
+            scoreBoardInstance = new ScoreBoard();
         }
 
-        return instance;
+        return scoreBoardInstance;
     }
 
     public void Add(string name, int attempts)
     {
         this.score.Add(new KeyValuePair<string, int>(name, attempts));
-        Sort();
-        if (this.score.Count > boardSize)
+        this.Sort();
+        if (this.score.Count > BoardSize)
         {
             this.score.RemoveAt(this.score.Count - 1);
         }
     }
 
-    public void SortScoreBoard()
+    public void PrintScoreBoard()
     {
         if (this.score.Count == 0)
         {
@@ -57,7 +57,7 @@ public class ScoreBoard
             return;
         }
 
-        Sort();
+        this.Sort();
         Console.WriteLine("Scoreboard:");
 
         for (int index = 0; index < this.score.Count; index++)
@@ -70,4 +70,3 @@ public class ScoreBoard
         Console.WriteLine();
     }
 }
-

@@ -116,7 +116,7 @@ class BullsAndCows
             else if (inputLine.CompareTo("top") == 0)
             {
                 ScoreBoard scoreboard = ScoreBoard.GetInstance();
-                scoreboard.SortScoreBoard();
+                scoreboard.PrintScoreBoard();
             }
             else if (inputLine.CompareTo("restart") == 0)
             {
@@ -174,7 +174,7 @@ class BullsAndCows
                     Console.WriteLine(OUT_SCOREBOARD);
                 }
 
-                scoreBoard.SortScoreBoard();
+                scoreBoard.PrintScoreBoard();
 
                 isGameRunning = false;
             }
