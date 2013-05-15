@@ -4,13 +4,17 @@ namespace BullsAndCowsGame.Tests
 {
     using System;
     using Microsoft.VisualStudio.TestTools.UnitTesting;
+    using BullsAndCows;
 
     [TestClass]
-    public class TestGameLogic
+    public class ScoreBoardUnitTests
     {
         [TestMethod]
-        public void TestMethod1()
+        public void ScoreBoardAddTest()
         {
+            ScoreBoard board = new ScoreBoard();
+            board.Add("Pesho", 5);
+            Assert.AreEqual(1, board.Count());
         }
     }
 }

@@ -39,6 +39,11 @@ namespace BullsAndCows
             }
         }
 
+        public int Count()
+        {
+            return this.highScores.Count();
+        }
+
         public override string ToString()
         {
             StringBuilder scoreBoardAsString = new StringBuilder();
