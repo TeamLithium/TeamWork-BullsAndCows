@@ -172,5 +172,16 @@ namespace BullsAndCowsGame.Tests
 
             Assert.AreEqual(false, secretNumberOne.SecretDigits == secretNumberTwo.SecretDigits);
         }
+
+        [TestMethod]
+        public void CheckIncorectGuessAtempt()
+        {
+            BullsAndCows secretNumber = new BullsAndCows();
+
+            string guess = "pesho";
+            int bulls = 0, cows = 0;
+
+            Assert.IsFalse(secretNumber.IsGuessCorrect(guess, out bulls, out cows));
+        }
     }
 }
