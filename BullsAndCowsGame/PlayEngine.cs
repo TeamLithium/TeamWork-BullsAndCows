@@ -6,7 +6,6 @@ namespace BullsAndCows
 
     public class PlayEngine
     {
-        private const int DigitsNumber = 4;
         private const string StartText = "Welcome to “Bulls and Cows” game.Please try to guess my secret 4-digit number.\n" +
                                                 "Use 'top' to view the top scoreboard, 'restart' to start a new game\n" +
                                                 "and 'help' to cheat and 'exit' to quit the game.\n";
@@ -69,7 +68,7 @@ namespace BullsAndCows
             {
                 this.atemptsCount++;
 
-                if (bullsCount == DigitsNumber)
+                if (bullsCount == secretNumber.DigitsNumber)
                 {
                     Console.WriteLine("Congratulations! You guessed the secret number in {0} attempts and {1} cheats.", this.atemptsCount, this.helpUsedCount);
                     Console.WriteLine(new string('-', 80));
