@@ -3,8 +3,8 @@
 namespace BullsAndCowsGame.Tests
 {
     using System;
-    using Microsoft.VisualStudio.TestTools.UnitTesting;
     using BullsAndCows;
+    using Microsoft.VisualStudio.TestTools.UnitTesting;
 
     [TestClass]
     public class ScoreBoardUnitTests
@@ -12,9 +12,21 @@ namespace BullsAndCowsGame.Tests
         [TestMethod]
         public void ScoreBoardAddTest()
         {
-            ScoreBoard board = new ScoreBoard();
-            board.Add("Pesho", 5);
-            Assert.AreEqual(1, board.Count());
+            ScoreBoard scoreBoard = new ScoreBoard();
+            scoreBoard.Add("Pesho", 5);
+            Assert.AreEqual(1, scoreBoard.Count());
+        }
+
+        [TestMethod]
+        public void CheckHighScoreComparer()
+        {
+            ScoreBoard scoreBoard = new ScoreBoard();
+            for (int index = 0; index < scoreBoard.BoardSize; index++)
+            {
+                scoreBoard.Add("Pesho", 5);
+            }
+
+            Assert.AreEqual(true, scoreBoard.IsHighScore(6));
         }
     }
 }

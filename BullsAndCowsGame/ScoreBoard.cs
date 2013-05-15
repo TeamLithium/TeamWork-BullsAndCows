@@ -9,7 +9,7 @@ namespace BullsAndCows
 
     public class ScoreBoard
     {
-        private const int BoardSize = 5;
+        public readonly int BoardSize = 5;
         private List<KeyValuePair<string, int>> highScores;
 
         public ScoreBoard()
@@ -19,7 +19,7 @@ namespace BullsAndCows
 
         public bool IsHighScore(int attempts)
         {
-            if (this.highScores.Count < BoardSize || this.highScores.Last().Value < attempts)
+            if (this.highScores.Count < this.BoardSize || this.highScores.Last().Value < attempts)
             {
                 return true;
             }
@@ -33,7 +33,7 @@ namespace BullsAndCows
 
             this.Sort();
 
-            if (this.highScores.Count > BoardSize)
+            if (this.highScores.Count > this.BoardSize)
             {
                 this.highScores.RemoveAt(this.highScores.Count - 1);
             }

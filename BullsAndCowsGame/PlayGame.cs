@@ -8,7 +8,8 @@ namespace BullsAndCows
     {
         public static void Main()
         {
-            BullsAndCows newGame = new BullsAndCows();
+            //BullsAndCows newGame = new BullsAndCows();
+            PlayEngine newGame = new PlayEngine();
             newGame.StartGame();
         }
     }
