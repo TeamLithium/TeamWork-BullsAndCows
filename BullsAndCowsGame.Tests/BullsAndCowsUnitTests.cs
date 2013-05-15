@@ -163,6 +163,7 @@ namespace BullsAndCowsGame.Tests
             Assert.IsTrue(bulls == 1 && cows == 1);
         }
 
+        [TestMethod]
         public void CheckRandomGenerator()
         {
             BullsAndCows secretNumberOne = new BullsAndCows();
