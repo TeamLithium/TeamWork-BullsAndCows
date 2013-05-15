@@ -19,7 +19,7 @@ namespace BullsAndCows
 
         public bool IsHighScore(int attempts)
         {
-            if (this.highScores.Count < this.BoardSize || this.highScores.Last().Value < attempts)
+            if (this.highScores.Count < this.BoardSize || this.highScores.Last().Value > attempts)
             {
                 return true;
             }
@@ -50,7 +50,7 @@ namespace BullsAndCows
 
             if (this.highScores.Count == 0)
             {
-                scoreBoardAsString.AppendLine("Scoreboard empty! \r\n");
+                scoreBoardAsString.AppendLine("Scoreboard empty!");
             }
             else
             {
