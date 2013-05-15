@@ -174,14 +174,31 @@ namespace BullsAndCowsGame.Tests
         }
 
         [TestMethod]
+        public void CheckGuessWithGreaterLenght()
+        {
+            BullsAndCows secretNumber = new BullsAndCows();
+
+            string guess = "12345";
+            int bulls = 0, cows = 0;
+
+            Assert.IsFalse(secretNumber.IsGuessCorrect(guess, out bulls, out cows));
+        }
+
+        [TestMethod]
         public void CheckIncorectGuessAtempt()
         {
             BullsAndCows secretNumber = new BullsAndCows();
 
-            string guess = "pesho";
+            string guess = "pesh";
             int bulls = 0, cows = 0;
 
             Assert.IsFalse(secretNumber.IsGuessCorrect(guess, out bulls, out cows));
+        }
+
+        [TestMethod]
+        public void TestMaxHelpsUsed()
+        {
+            // TODO: Implement this test
         }
     }
 }
