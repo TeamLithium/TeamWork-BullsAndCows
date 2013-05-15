@@ -116,5 +116,50 @@ namespace BullsAndCowsGame.Tests
             game.IsGuessCorrect("2259", out bulls, out cows);
             Assert.IsTrue(bulls == 1 && cows == 0);
         }
+
+        [TestMethod]
+        public void ThreeCowsOneBullTest()
+        {
+            List<int> secretNumber = new List<int>() { 1, 2, 3, 4 };
+            BullsAndCows game = new BullsAndCows();
+
+            Type type = typeof(BullsAndCows);
+            var fieldValue = type.GetField("secretDigits", BindingFlags.Instance | BindingFlags.NonPublic);
+            fieldValue.SetValue(game, secretNumber);
+
+            int bulls, cows;
+            game.IsGuessCorrect("2431", out bulls, out cows);
+            Assert.IsTrue(bulls == 1 && cows == 3);
+        }
+
+        [TestMethod]
+        public void TwoBullsTwoCowsTest()
+        {
+            List<int> secretNumber = new List<int>() { 1, 2, 3, 4 };
+            BullsAndCows game = new BullsAndCows();
+
+            Type type = typeof(BullsAndCows);
+            var fieldValue = type.GetField("secretDigits", BindingFlags.Instance | BindingFlags.NonPublic);
+            fieldValue.SetValue(game, secretNumber);
+
+            int bulls, cows;
+            game.IsGuessCorrect("4231", out bulls, out cows);
+            Assert.IsTrue(bulls == 2 && cows == 2);
+        }
+
+        [TestMethod]
+        public void OneBullOneCowTest()
+        {
+            List<int> secretNumber = new List<int>() { 5, 5, 3, 4 };
+            BullsAndCows game = new BullsAndCows();
+
+            Type type = typeof(BullsAndCows);
+            var fieldValue = type.GetField("secretDigits", BindingFlags.Instance | BindingFlags.NonPublic);
+            fieldValue.SetValue(game, secretNumber);
+
+            int bulls, cows;
+            game.IsGuessCorrect("9558", out bulls, out cows);
+            Assert.IsTrue(bulls == 1 && cows == 1);
+        }
     }
 }
