@@ -10,7 +10,6 @@ namespace BullsAndCows
                                                 "Use 'top' to view the top scoreboard, 'restart' to start a new game\n" +
                                                 "and 'help' to cheat and 'exit' to quit the game.\n";
 
-        private const string EnterGuessText = "Enter your guess or command: ";
         private const string ScoreBoardEnterAllowedText = "Please enter your name for the top scoreboard: ";
         private const string ScoreBoardEnterUnallowedText = "You are not allowed to enter the top scoreboard.";
 
@@ -30,30 +29,28 @@ namespace BullsAndCows
 
             do
             {
-                Console.WriteLine(EnterGuessText);
+                Console.WriteLine("Enter your guess or command: ");
                 string inputLine = Console.ReadLine().Trim().ToLower();
 
-                if (inputLine.CompareTo("help") == 0)
+                switch (inputLine)
                 {
-                    secretNumber.RevealRandomDigit(ref this.helpUsedCount);
-                }
-                else if (inputLine.CompareTo("top") == 0)
-                {
-                    Console.WriteLine(this.scoreBoard);
-                }
-                else if (inputLine.CompareTo("restart") == 0)
-                {
-                    Console.Clear();
-                    this.StartGame();
-                }
-                else if (inputLine.CompareTo("exit") == 0)
-                {
-                    this.isGameRunning = false;
-                    Console.WriteLine("Good bye!");
-                }
-                else
-                {
-                    this.ManageNumbersCommand(inputLine, secretNumber);
+                    case "help": 
+                        secretNumber.RevealRandomDigit(ref this.helpUsedCount);
+                        break;
+                    case "top": 
+                        Console.WriteLine(this.scoreBoard);
+                        break;
+                    case "restart":
+                        Console.Clear();
+                        this.StartGame();
+                        break;
+                    case "exit":
+                        this.isGameRunning = false;
+                        Console.WriteLine("Good bye!");
+                        break;
+                    default:
+                        this.ManageNumbersCommand(inputLine, secretNumber);
+                        break;
                 }
             }
             while (this.isGameRunning);

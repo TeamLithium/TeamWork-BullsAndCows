@@ -44,6 +44,7 @@ namespace BullsAndCows
             }
 
             int[] guessedDigits = new int[this.DigitsNumber];
+            bool[] checkedDigits = new bool[this.DigitsNumber];
 
             for (int index = 0; index < this.DigitsNumber; index++)
             {
@@ -54,11 +55,17 @@ namespace BullsAndCows
 
                 if (guessedDigits[index] == this.secretDigits[index])
                 {
+                    checkedDigits[index] = true;
                     bulls++;
                 }
                 else if (this.secretDigits.Contains(guessedDigits[index]))
                 {
-                    cows++;
+                    int indexOfCow = this.secretDigits.IndexOf(guessedDigits[index]);
+                    if (!checkedDigits[indexOfCow])
+                    {
+                        checkedDigits[indexOfCow] = true;
+                        cows++;
+                    }
                 }
             }
 
