@@ -151,6 +151,25 @@ namespace BullsAndCowsGame.Tests
         [TestMethod]
         public void OneBullOneCowTest()
         {
+            List<int> secretNumber = new List<int>() { 5, 5, 8, 9 };
+            BullsAndCows game = new BullsAndCows();
+
+            Type type = typeof(BullsAndCows);
+            var fieldValue = type.GetField("secretDigits", BindingFlags.Instance | BindingFlags.NonPublic);
+            fieldValue.SetValue(game, secretNumber);
+
+            int bulls, cows;
+            game.IsGuessCorrect("4553", out bulls, out cows);
+            Assert.IsTrue(bulls == 1 && cows == 1);
+        }
+
+        public void CheckRandomGenerator()
+        {
+            BullsAndCows secretNumberOne = new BullsAndCows();
+            Thread.Sleep(500);
+            BullsAndCows secretNumberTwo = new BullsAndCows();
+
+            Assert.AreEqual(false, secretNumberOne.SecretDigits == secretNumberTwo.SecretDigits);
         }
     }
 }
