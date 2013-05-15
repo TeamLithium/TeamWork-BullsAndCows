@@ -14,8 +14,6 @@ namespace BullsAndCows
                                                 "and 'help' to cheat and 'exit' to quit the game.\n";
 
         private const string EnterGuessText = "Enter your guess or command: ";
-        private const string HelpAvailableText = "The number looks like";
-        private const string HelpUnavailableText = "You cannot use more help.";
         private const string ScoreBoardEnterAllowedText = "Please enter your name for the top scoreboard: ";
         private const string ScoreBoardEnterUnallowedText = "You are not allowed to enter the top scoreboard.";
 
@@ -28,14 +26,14 @@ namespace BullsAndCows
         private ScoreBoard scoreBoard;
 
         public BullsAndCows()
-        {
-            this.digits = new List<int>();
+        {            
             this.scoreBoard = new ScoreBoard();
         }
 
         public void StartGame()
         {
             Console.WriteLine(StartText);
+            this.digits = new List<int>();
             this.CreateRandomDigits();
             this.helpUsedCount = 0;
             this.atemptsCount = 0;
@@ -122,7 +120,8 @@ namespace BullsAndCows
         {
             if (this.helpUsedCount == DigitsNumber)
             {
-                Console.WriteLine(HelpUnavailableText);
+                Console.WriteLine("You cannot use more help.\nGame Over.\n");
+                this.StartGame();
             }
             else
             {
@@ -137,7 +136,7 @@ namespace BullsAndCows
                 this.helpDigits[helpPosition] = char.Parse(this.digits[helpPosition].ToString());
                 this.helpUsedCount++;
 
-                Console.WriteLine("{0} {1}", HelpAvailableText, new string(this.helpDigits));
+                Console.WriteLine("The number looks like " + new string(this.helpDigits));
             }
         }
 
