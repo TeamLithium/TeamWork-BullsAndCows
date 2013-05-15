@@ -55,7 +55,14 @@ namespace BullsAndCows
 
                 if (guessedDigits[index] == this.secretDigits[index])
                 {
-                    checkedDigits[index] = true;
+                    if (checkedDigits[index])
+                    {
+                        cows--;
+                    }
+                    else
+                    {
+                        checkedDigits[index] = true;
+                    }
                     bulls++;
                 }
                 else if (this.secretDigits.Contains(guessedDigits[index]))
