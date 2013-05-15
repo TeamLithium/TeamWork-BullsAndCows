@@ -25,6 +25,7 @@ namespace BullsAndCowsGame.Tests
             {
                 scoreBoard.Add("Pesho", 2);
             }
+
             Assert.AreEqual(5, scoreBoard.Count());
         }
 
@@ -58,6 +59,22 @@ namespace BullsAndCowsGame.Tests
             }
 
             Assert.IsFalse(scoreBoard.IsHighScore(4));
+        }
+
+        [TestMethod]
+        public void TestScoreboardPrinting()
+        {
+            int results = 2;
+            ScoreBoard scoreBoard = new ScoreBoard();
+            for (int index = 0; index < results; index++)
+            {
+                scoreBoard.Add("Pesho", index + 1);
+            }
+
+            Assert.AreEqual(scoreBoard.ToString(), string.Format("{0}\r\n{1}\r\n{2}\r\n\r\n",
+                                                                    "Scoreboard:",
+                                                                    "1. Pesho --> 1 guesses",
+                                                                    "2. Pesho --> 2 guesses"));
         }
     }
 }

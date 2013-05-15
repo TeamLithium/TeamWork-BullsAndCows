@@ -4,6 +4,7 @@ namespace BullsAndCowsGame.Tests
 {
     using System;
     using BullsAndCows;
+    using System.Threading;
     using Microsoft.VisualStudio.TestTools.UnitTesting;
     using System.Reflection;
     using System.Collections.Generic;
@@ -150,16 +151,6 @@ namespace BullsAndCowsGame.Tests
         [TestMethod]
         public void OneBullOneCowTest()
         {
-            List<int> secretNumber = new List<int>() { 5, 5, 3, 4 };
-            BullsAndCows game = new BullsAndCows();
-
-            Type type = typeof(BullsAndCows);
-            var fieldValue = type.GetField("secretDigits", BindingFlags.Instance | BindingFlags.NonPublic);
-            fieldValue.SetValue(game, secretNumber);
-
-            int bulls, cows;
-            game.IsGuessCorrect("9558", out bulls, out cows);
-            Assert.IsTrue(bulls == 1 && cows == 1);
         }
     }
 }

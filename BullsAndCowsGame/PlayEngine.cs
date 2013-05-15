@@ -23,7 +23,6 @@ namespace BullsAndCows
             Console.WriteLine(StartText);
 
             BullsAndCows secretNumber = new BullsAndCows();
-            secretNumber.CreateRandomDigits();
             this.helpUsedCount = 0;
             this.atemptsCount = 0;
 
