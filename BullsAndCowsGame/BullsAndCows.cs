@@ -5,6 +5,7 @@ namespace BullsAndCows
     using System;
     using System.Collections.Generic;
     using System.Linq;
+    using System.Text;
 
     public class BullsAndCows
     {
@@ -16,20 +17,21 @@ namespace BullsAndCows
         public BullsAndCows()
         {
             this.secretDigits = new List<int>();
+            this.CreateRandomDigits();
         }
 
-        public void CreateRandomDigits()
+        public int SecretDigits
         {
-            for (int index = 0; index < this.DigitsNumber; index++)
+            get
             {
-                this.secretDigits.Add(this.randomDigit.Next(0, 10));
-            }
+                int number = 0;
 
-            this.helpDigits = new char[this.DigitsNumber];
+                for (int index = 0; index < this.DigitsNumber; index++)
+                {
+                    number = (number * 10) + this.secretDigits[index];
+                }
 
-            for (int index = 0; index < this.DigitsNumber; index++)
-            {
-                this.helpDigits[index] = 'X';
+                return number;
             }
         }
 
@@ -63,6 +65,7 @@ namespace BullsAndCows
                     {
                         checkedDigits[index] = true;
                     }
+
                     bulls++;
                 }
                 else if (this.secretDigits.Contains(guessedDigits[index]))
@@ -99,6 +102,21 @@ namespace BullsAndCows
                 helpUsedCount++;
 
                 Console.WriteLine("The number looks like " + new string(this.helpDigits));
+            }
+        }
+
+        private void CreateRandomDigits()
+        {
+            for (int index = 0; index < this.DigitsNumber; index++)
+            {
+                this.secretDigits.Add(this.randomDigit.Next(0, 10));
+            }
+
+            this.helpDigits = new char[this.DigitsNumber];
+
+            for (int index = 0; index < this.DigitsNumber; index++)
+            {
+                this.helpDigits[index] = 'X';
             }
         }
     }

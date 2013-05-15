@@ -4,6 +4,7 @@ namespace BullsAndCowsGame.Tests
 {
     using System;
     using BullsAndCows;
+    using System.Threading;
     using Microsoft.VisualStudio.TestTools.UnitTesting;
 
     [TestClass]
@@ -12,6 +13,11 @@ namespace BullsAndCowsGame.Tests
         [TestMethod]
         public void CheckRandomGenerator()
         {
+            BullsAndCows secretNumberOne = new BullsAndCows();
+            Thread.Sleep(500);
+            BullsAndCows secretNumberTwo = new BullsAndCows();
+
+            Assert.AreEqual(false, secretNumberOne.SecretDigits == secretNumberTwo.SecretDigits);
         }
     }
 }
