@@ -10,9 +10,6 @@ namespace BullsAndCows
                                                 "Use 'top' to view the top scoreboard, 'restart' to start a new game\n" +
                                                 "and 'help' to cheat and 'exit' to quit the game.\n";
 
-        private const string ScoreBoardEnterAllowedText = "Please enter your name for the top scoreboard: ";
-        private const string ScoreBoardEnterUnallowedText = "You are not allowed to enter the top scoreboard.";
-
         private bool isGameRunning = true;
         private int helpUsedCount;
         private int atemptsCount;
@@ -71,14 +68,14 @@ namespace BullsAndCows
 
                     if (this.helpUsedCount == 0 && this.scoreBoard.IsHighScore(this.atemptsCount))
                     {
-                        Console.WriteLine(ScoreBoardEnterAllowedText);
+                        Console.WriteLine("Please enter your name for the top scoreboard: ");
 
                         string name = Console.ReadLine();
                         this.scoreBoard.Add(name, this.atemptsCount);
                     }
                     else
                     {
-                        Console.WriteLine(ScoreBoardEnterUnallowedText);
+                        Console.WriteLine("You are not allowed to enter the top scoreboard.");
                     }
 
                     Console.WriteLine(this.scoreBoard);
