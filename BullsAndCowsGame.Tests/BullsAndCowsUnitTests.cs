@@ -47,7 +47,7 @@ namespace BullsAndCowsGame.Tests
         public void ZeroBullsAndZeroCowsTest()
         {
             BullsAndCows game = new BullsAndCows();
-            List<int> secretNumber = new List<int>() { 1, 2, 3, 4 };            
+            List<int> secretNumber = new List<int>() { 1, 2, 3, 4 };
 
             Type type = typeof(BullsAndCows);
             var fieldValue = type.GetField("secretDigits", BindingFlags.Instance | BindingFlags.NonPublic);
@@ -198,7 +198,12 @@ namespace BullsAndCowsGame.Tests
         [TestMethod]
         public void TestMaxHelpsUsed()
         {
-            // TODO: Implement this test
+            BullsAndCows secretNumber = new BullsAndCows();
+            int usedHelps = secretNumber.DigitsNumber;
+
+            string expected = secretNumber.RevealRandomDigit(ref usedHelps);
+
+            Assert.AreEqual(expected, "You cannot use more help.\r\nGame Over.");
         }
     }
 }

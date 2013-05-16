@@ -31,7 +31,8 @@ namespace BullsAndCows
                 switch (inputLine)
                 {
                     case "help": 
-                        secretNumber.RevealRandomDigit(ref this.helpUsedCount);
+                        string digitsRevealed = secretNumber.RevealRandomDigit(ref this.helpUsedCount);
+                        Console.WriteLine(digitsRevealed);
                         break;
                     case "top": 
                         Console.WriteLine(this.scoreBoard);

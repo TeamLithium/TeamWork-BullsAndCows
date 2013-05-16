@@ -81,11 +81,13 @@ namespace BullsAndCows
             return true;
         }
 
-        public void RevealRandomDigit(ref int helpUsedCount)
+        public string RevealRandomDigit(ref int helpUsedCount)
         {
             if (helpUsedCount == this.DigitsNumber)
             {
-                Console.WriteLine("You cannot use more help.\nGame Over.\n");
+                string overMessage = "You cannot use more help.\r\nGame Over.";
+
+                return overMessage; 
             }
             else
             {
@@ -100,7 +102,7 @@ namespace BullsAndCows
                 this.helpDigits[helpPosition] = char.Parse(this.secretDigits[helpPosition].ToString());
                 helpUsedCount++;
 
-                Console.WriteLine("The number looks like " + new string(this.helpDigits));
+                return String.Format("The numbers look like {0}", new string(this.helpDigits));
             }
         }
 
