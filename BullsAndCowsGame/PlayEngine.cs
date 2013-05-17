@@ -4,22 +4,47 @@ namespace BullsAndCows
 {
     using System;
 
+    /// <summary>
+    /// A class maintaining the commands and the user input. 
+    /// </summary>
     public class PlayEngine
     {
+        /// <summary>
+        /// A constant string, containing the welcome message of the game
+        /// </summary>
         private const string StartText = "Welcome to “Bulls and Cows” game.Please try to guess my secret 4-digit number.\n" +
                                                 "Use 'top' to view the top scoreboard, 'restart' to start a new game\n" +
                                                 "and 'help' to cheat and 'exit' to quit the game.\n";
 
+        /// <summary>
+        /// A bool variable which indicates if a game is currently running or not.
+        /// </summary>
         private bool isGameRunning = true;
+
+        /// <summary>
+        /// Counts the number of helps used
+        /// </summary>
         private int helpUsedCount;
+
+        /// <summary>
+        /// Counts the number of atempts by the user.
+        /// </summary>
         private int atemptsCount;
+
+        /// <summary>
+        /// A variable of type ScoreBoard which contains the high scores in the game
+        /// </summary>
         private ScoreBoard scoreBoard = new ScoreBoard();
 
+        /// <summary>
+        /// Stats the game, gets user input and using a switch statement selects the
+        /// apropriate menu
+        /// </summary>
         public void StartGame()
         {
             Console.WriteLine(StartText);
 
-            BullsAndCows secretNumber = new BullsAndCows();
+            BullsAndCowsNumber secretNumber = new BullsAndCowsNumber();
             this.helpUsedCount = 0;
             this.atemptsCount = 0;
 
@@ -53,7 +78,12 @@ namespace BullsAndCows
             while (this.isGameRunning);
         }
 
-        private void ManageUserGuess(string inputLine, BullsAndCows secretNumber)
+        /// <summary>
+        /// A private method which manages the user guess if the input is a string 
+        /// different than a command. If the guess is a string of numbers, the 
+        /// method is executed completely. If not prints an apropriate message.
+        /// </summary>
+        private void ManageUserGuess(string inputLine, BullsAndCowsNumber secretNumber)
         {
             int bullsCount = 0;
             int cowsCount = 0;

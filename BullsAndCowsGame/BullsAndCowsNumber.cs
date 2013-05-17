@@ -6,19 +6,41 @@ namespace BullsAndCows
     using System.Collections.Generic;
     using System.Linq;
 
-    public class BullsAndCows
+    /// <summary>
+    /// Class that holds the computer's secret number
+    /// </summary>
+    public class BullsAndCowsNumber
     {
+        /// <summary>
+        /// A readonly field which contains the number of digits in the secret number
+        /// </summary>
         public readonly int DigitsNumber = 4;
+
         private Random randomDigit = new Random();
+
+        /// <summary>
+        /// List that holds the digits in the secret number
+        /// </summary>
         private List<int> secretDigits;
+
+        /// <summary>
+        /// Char string which initially contains XXXX. After calling the RevealRandomDigit method 
+        /// one random X is replaced with a number from the secretDigits list
+        /// </summary>
         private char[] helpDigits;
 
-        public BullsAndCows()
+        /// <summary>
+        /// Constructor for the class
+        /// </summary>
+        public BullsAndCowsNumber()
         {
             this.secretDigits = new List<int>();
             this.CreateRandomDigits();
         }
 
+        /// <summary>
+        /// Basic property for the secretDigits list. Returns the secretDigits as an integer number
+        /// </summary>
         public int SecretDigits
         {
             get
@@ -34,6 +56,13 @@ namespace BullsAndCows
             }
         }
 
+        /// <summary>
+        /// Checks if user guess is correct and if true, returns the number of bulls and cows
+        /// in the guess.
+        /// </summary>
+        /// <param name="guess">Pass the guess as a string</param>
+        /// <param name="bulls">A pointer to the bulls variable</param>
+        /// <param name="cows">A pointer to the bulls cows</param>
         public bool IsGuessCorrect(string guess, out int bulls, out int cows)
         {
             bulls = 0;
@@ -81,6 +110,12 @@ namespace BullsAndCows
             return true;
         }
 
+        /// <summary>
+        /// Checks if the max amount of helps is used. If used returns a string containing apropriate 
+        /// message. If not used changes the first X to a number in the helpDigits string
+        /// and returns a string containing a message with the numbers
+        /// </summary>
+        /// <param name="helpUsedCount">Pass the number of helps currently used as a refference</param>
         public string RevealRandomDigit(ref int helpUsedCount)
         {
             if (helpUsedCount == this.DigitsNumber)
@@ -91,13 +126,17 @@ namespace BullsAndCows
             }
             else
             {
-                int helpPosition;
+                int helpPosition = 0;
+                bool isPositionFound = false;
 
-                do
+                for (int index = 0; (index < this.DigitsNumber) && !isPositionFound; index++)
                 {
-                    helpPosition = this.randomDigit.Next(this.DigitsNumber);
+                    if (this.helpDigits[index] == 'X')
+                    {
+                        helpPosition = index;
+                        isPositionFound = true;                        
+                    }
                 }
-                while (this.helpDigits[helpPosition] != 'X');
 
                 this.helpDigits[helpPosition] = char.Parse(this.secretDigits[helpPosition].ToString());
                 helpUsedCount++;
@@ -106,11 +145,21 @@ namespace BullsAndCows
             }
         }
 
+        /// <summary>
+        /// A private method filling the list of digits (secretDigits). And the helpDigits with X's
+        /// </summary>
         private void CreateRandomDigits()
         {
             for (int index = 0; index < this.DigitsNumber; index++)
             {
-                this.secretDigits.Add(this.randomDigit.Next(0, 10));
+                if (index == 0)
+                {
+                    this.secretDigits.Add(this.randomDigit.Next(1, 10));
+                }
+                else
+                {
+                    this.secretDigits.Add(this.randomDigit.Next(0, 10));
+                }
             }
 
             this.helpDigits = new char[this.DigitsNumber];

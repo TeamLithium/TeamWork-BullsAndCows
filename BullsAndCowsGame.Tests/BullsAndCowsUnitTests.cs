@@ -16,9 +16,9 @@ namespace BullsAndCowsGame.Tests
         public void OneBullAndZeroCowsTest()
         {
             List<int> secretNumber = new List<int>() { 1, 2, 3, 4 };
-            BullsAndCows game = new BullsAndCows();
+            BullsAndCowsNumber game = new BullsAndCowsNumber();
 
-            Type type = typeof(BullsAndCows);
+            Type type = typeof(BullsAndCowsNumber);
             var fieldValue = type.GetField("secretDigits", BindingFlags.Instance | BindingFlags.NonPublic);
             fieldValue.SetValue(game, secretNumber);
 
@@ -32,9 +32,9 @@ namespace BullsAndCowsGame.Tests
         public void OneBullAndTwoCowsTest()
         {
             List<int> secretNumber = new List<int>() { 1, 2, 3, 4 };
-            BullsAndCows game = new BullsAndCows();
+            BullsAndCowsNumber game = new BullsAndCowsNumber();
 
-            Type type = typeof(BullsAndCows);
+            Type type = typeof(BullsAndCowsNumber);
             var fieldValue = type.GetField("secretDigits", BindingFlags.Instance | BindingFlags.NonPublic);
             fieldValue.SetValue(game, secretNumber);
 
@@ -46,10 +46,10 @@ namespace BullsAndCowsGame.Tests
         [TestMethod]
         public void ZeroBullsAndZeroCowsTest()
         {
-            BullsAndCows game = new BullsAndCows();
+            BullsAndCowsNumber game = new BullsAndCowsNumber();
             List<int> secretNumber = new List<int>() { 1, 2, 3, 4 };
 
-            Type type = typeof(BullsAndCows);
+            Type type = typeof(BullsAndCowsNumber);
             var fieldValue = type.GetField("secretDigits", BindingFlags.Instance | BindingFlags.NonPublic);
             fieldValue.SetValue(game, secretNumber);
 
@@ -62,9 +62,9 @@ namespace BullsAndCowsGame.Tests
         public void FourBullsTest()
         {
             List<int> secretNumber = new List<int>() { 1, 2, 3, 4 };
-            BullsAndCows game = new BullsAndCows();
+            BullsAndCowsNumber game = new BullsAndCowsNumber();
 
-            Type type = typeof(BullsAndCows);
+            Type type = typeof(BullsAndCowsNumber);
             var fieldValue = type.GetField("secretDigits", BindingFlags.Instance | BindingFlags.NonPublic);
             fieldValue.SetValue(game, secretNumber);
 
@@ -77,9 +77,9 @@ namespace BullsAndCowsGame.Tests
         public void FourCowsTest()
         {
             List<int> secretNumber = new List<int>() { 1, 2, 3, 4 };
-            BullsAndCows game = new BullsAndCows();
+            BullsAndCowsNumber game = new BullsAndCowsNumber();
 
-            Type type = typeof(BullsAndCows);
+            Type type = typeof(BullsAndCowsNumber);
             var fieldValue = type.GetField("secretDigits", BindingFlags.Instance | BindingFlags.NonPublic);
             fieldValue.SetValue(game, secretNumber);
 
@@ -92,9 +92,9 @@ namespace BullsAndCowsGame.Tests
         public void OneCowTestWithTwoEqualDigitsInTheGuess()
         {
             List<int> secretNumber = new List<int>() { 1, 2, 3, 4 };
-            BullsAndCows game = new BullsAndCows();
+            BullsAndCowsNumber game = new BullsAndCowsNumber();
 
-            Type type = typeof(BullsAndCows);
+            Type type = typeof(BullsAndCowsNumber);
             var fieldValue = type.GetField("secretDigits", BindingFlags.Instance | BindingFlags.NonPublic);
             fieldValue.SetValue(game, secretNumber);
 
@@ -107,9 +107,9 @@ namespace BullsAndCowsGame.Tests
         public void OneBullAndZeroCowsTestWithTwoEqualDigitsInTheGuess()
         {
             List<int> secretNumber = new List<int>() { 1, 2, 3, 4 };
-            BullsAndCows game = new BullsAndCows();
+            BullsAndCowsNumber game = new BullsAndCowsNumber();
 
-            Type type = typeof(BullsAndCows);
+            Type type = typeof(BullsAndCowsNumber);
             var fieldValue = type.GetField("secretDigits", BindingFlags.Instance | BindingFlags.NonPublic);
             fieldValue.SetValue(game, secretNumber);
 
@@ -122,9 +122,9 @@ namespace BullsAndCowsGame.Tests
         public void ThreeCowsOneBullTest()
         {
             List<int> secretNumber = new List<int>() { 1, 2, 3, 4 };
-            BullsAndCows game = new BullsAndCows();
+            BullsAndCowsNumber game = new BullsAndCowsNumber();
 
-            Type type = typeof(BullsAndCows);
+            Type type = typeof(BullsAndCowsNumber);
             var fieldValue = type.GetField("secretDigits", BindingFlags.Instance | BindingFlags.NonPublic);
             fieldValue.SetValue(game, secretNumber);
 
@@ -137,9 +137,9 @@ namespace BullsAndCowsGame.Tests
         public void TwoBullsTwoCowsTest()
         {
             List<int> secretNumber = new List<int>() { 1, 2, 3, 4 };
-            BullsAndCows game = new BullsAndCows();
+            BullsAndCowsNumber game = new BullsAndCowsNumber();
 
-            Type type = typeof(BullsAndCows);
+            Type type = typeof(BullsAndCowsNumber);
             var fieldValue = type.GetField("secretDigits", BindingFlags.Instance | BindingFlags.NonPublic);
             fieldValue.SetValue(game, secretNumber);
 
@@ -152,9 +152,9 @@ namespace BullsAndCowsGame.Tests
         public void OneBullOneCowTest()
         {
             List<int> secretNumber = new List<int>() { 5, 5, 8, 9 };
-            BullsAndCows game = new BullsAndCows();
+            BullsAndCowsNumber game = new BullsAndCowsNumber();
 
-            Type type = typeof(BullsAndCows);
+            Type type = typeof(BullsAndCowsNumber);
             var fieldValue = type.GetField("secretDigits", BindingFlags.Instance | BindingFlags.NonPublic);
             fieldValue.SetValue(game, secretNumber);
 
@@ -166,9 +166,9 @@ namespace BullsAndCowsGame.Tests
         [TestMethod]
         public void CheckRandomGenerator()
         {
-            BullsAndCows secretNumberOne = new BullsAndCows();
+            BullsAndCowsNumber secretNumberOne = new BullsAndCowsNumber();
             Thread.Sleep(500);
-            BullsAndCows secretNumberTwo = new BullsAndCows();
+            BullsAndCowsNumber secretNumberTwo = new BullsAndCowsNumber();
 
             Assert.AreEqual(false, secretNumberOne.SecretDigits == secretNumberTwo.SecretDigits);
         }
@@ -176,7 +176,7 @@ namespace BullsAndCowsGame.Tests
         [TestMethod]
         public void CheckGuessWithGreaterLenght()
         {
-            BullsAndCows secretNumber = new BullsAndCows();
+            BullsAndCowsNumber secretNumber = new BullsAndCowsNumber();
 
             string guess = "12345";
             int bulls = 0, cows = 0;
@@ -187,7 +187,7 @@ namespace BullsAndCowsGame.Tests
         [TestMethod]
         public void CheckIncorectGuessAtempt()
         {
-            BullsAndCows secretNumber = new BullsAndCows();
+            BullsAndCowsNumber secretNumber = new BullsAndCowsNumber();
 
             string guess = "pesh";
             int bulls = 0, cows = 0;
@@ -198,7 +198,7 @@ namespace BullsAndCowsGame.Tests
         [TestMethod]
         public void TestMaxHelpsUsed()
         {
-            BullsAndCows secretNumber = new BullsAndCows();
+            BullsAndCowsNumber secretNumber = new BullsAndCowsNumber();
             int usedHelps = secretNumber.DigitsNumber;
 
             string expected = secretNumber.RevealRandomDigit(ref usedHelps);

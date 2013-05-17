@@ -7,16 +7,36 @@ namespace BullsAndCows
     using System.Linq;
     using System.Text;
 
+    /// <summary>
+    /// Class containing the high scores in a game.
+    /// </summary>
     public class ScoreBoard
     {
+        /// <summary>
+        /// A readonly field containing the size of the high scores board
+        /// </summary>
         public readonly int BoardSize = 5;
+
+        /// <summary>
+        /// List , containing users currently in the high scores board
+        /// </summary>
         private List<KeyValuePair<string, int>> highScores;
 
+        /// <summary>
+        /// Constructor for the class. Initializes the highScores list
+        /// </summary>
         public ScoreBoard()
         {
             this.highScores = new List<KeyValuePair<string, int>>();
         }
 
+        /// <summary>
+        /// Checks if a given score is an attempt
+        /// </summary>
+        /// <param name="attempts">Pass the number of attempts by the user.</param>
+        /// <returns>True if the last of the scores in the sorted 
+        /// highScore list has less attempts
+        /// </returns>
         public bool IsHighScore(int attempts)
         {
             if (this.highScores.Count < this.BoardSize || this.highScores.Last().Value > attempts)
@@ -27,6 +47,12 @@ namespace BullsAndCows
             return false;
         }
 
+        /// <summary>
+        /// Adds ann attemt to the high scores board and removes the last 
+        /// element of the list if the list has more elements than BoardSize
+        /// </summary>
+        /// <param name="name">Pass the user name as a string</param>
+        /// <param name="attempts">Pass the number of attempts as an integer</param>
         public void Add(string name, int attempts)
         {
             this.highScores.Add(new KeyValuePair<string, int>(name, attempts));
@@ -39,11 +65,19 @@ namespace BullsAndCows
             }
         }
 
+        /// <summary>
+        /// Property which contains the number of high scores currently in the board
+        /// </summary>
         public int Count()
         {
             return this.highScores.Count();
         }
 
+        /// <summary>
+        /// An override mothod for ToString(). Building the high scores board
+        /// in an elegant and beautiful way. Almost sexy!
+        /// </summary>
+        /// <returns>String containing the formated high scores board</returns>
         public override string ToString()
         {
             StringBuilder scoreBoardAsString = new StringBuilder();
@@ -70,6 +104,9 @@ namespace BullsAndCows
             return scoreBoardAsString.ToString();
         }
 
+        /// <summary>
+        /// Void method which sorts the list of high score
+        /// </summary>
         private void Sort()
         {
             this.highScores.Sort(new Comparison<KeyValuePair<string, int>>((first, second) => first.Value.CompareTo(second.Value)));
