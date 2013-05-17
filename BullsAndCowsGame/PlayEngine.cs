@@ -46,14 +46,14 @@ namespace BullsAndCows
                         Console.WriteLine("Good bye!");
                         break;
                     default:
-                        this.ManageNumbersCommand(inputLine, secretNumber);
+                        this.ManageUserGuess(inputLine, secretNumber);
                         break;
                 }
             }
             while (this.isGameRunning);
         }
 
-        private void ManageNumbersCommand(string inputLine, BullsAndCows secretNumber)
+        private void ManageUserGuess(string inputLine, BullsAndCows secretNumber)
         {
             int bullsCount = 0;
             int cowsCount = 0;
