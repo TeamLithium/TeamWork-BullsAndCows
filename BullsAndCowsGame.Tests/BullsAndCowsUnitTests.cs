@@ -205,5 +205,34 @@ namespace BullsAndCowsGame.Tests
 
             Assert.AreEqual(expected, "You cannot use more help.\r\nGame Over.");
         }
+
+        [TestMethod]
+        public void TestHelpDigitsOutput()
+        {
+            BullsAndCowsNumber secretNumber = new BullsAndCowsNumber();
+            int usedHelps = 0;
+            int firstSectetDigit = secretNumber.SecretDigits / 1000;
+
+            string expected = secretNumber.RevealRandomDigit(ref usedHelps);
+
+            Assert.AreEqual(expected, string.Format("The numbers look like {0}XXX", firstSectetDigit));
+        }
+
+        [TestMethod]
+        public void TestHelpDigitsOutputOnlyDigits()
+        {
+            BullsAndCowsNumber secretNumber = new BullsAndCowsNumber();
+            int usedHelps = 0;
+            int secretDigits = secretNumber.SecretDigits;
+
+            for (int index = 0; index < secretNumber.DigitsNumber - 1; index++)
+            {
+                secretNumber.RevealRandomDigit(ref usedHelps);
+            }
+            string expected = secretNumber.RevealRandomDigit(ref usedHelps);
+            
+
+            Assert.AreEqual(expected, string.Format("The numbers look like {0}", secretDigits));
+        }
     }
 }

@@ -52,7 +52,6 @@
   <ItemGroup>
     <Compile Include="ScoreBoardUnitTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="PlayEngineUnitTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\BullsAndCowsGame\BullsAndCowsGame.csproj">
