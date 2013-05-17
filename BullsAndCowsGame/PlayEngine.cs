@@ -88,7 +88,7 @@ namespace BullsAndCows
             int bullsCount = 0;
             int cowsCount = 0;
 
-            if (secretNumber.IsGuessCorrect(inputLine, out bullsCount, out cowsCount))
+            if (secretNumber.IsGuessCorrect(inputLine, ref bullsCount, ref cowsCount))
             {
                 this.atemptsCount++;
 

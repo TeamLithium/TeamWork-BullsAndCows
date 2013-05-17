@@ -134,7 +134,7 @@
             <summary>
             Checks if a given score is an attempt
             </summary>
-            <param name="attempts">Pass the number of attempts by the user.</param>
+            <param name="score">Pass the number of attempts by the user.</param>
             <returns>True if the last of the scores in the sorted 
             highScore list has less attempts
             </returns>
@@ -145,7 +145,7 @@
             element of the list if the list has more elements than BoardSize
             </summary>
             <param name="name">Pass the user name as a string</param>
-            <param name="attempts">Pass the number of attempts as an integer</param>
+            <param name="score">Pass the number of attempts as an integer</param>
         </member>
         <member name="M:BullsAndCows.ScoreBoard.Count">
             <summary>

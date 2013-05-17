@@ -24,7 +24,7 @@ namespace BullsAndCowsGame.Tests
 
             int bulls = 0;
             int cows = 0;
-            game.IsGuessCorrect("1111", out bulls, out cows);
+            game.IsGuessCorrect("1111", ref bulls, ref cows);
             Assert.IsTrue(bulls == 1 && cows == 0);
         }
 
@@ -38,8 +38,9 @@ namespace BullsAndCowsGame.Tests
             var fieldValue = type.GetField("secretDigits", BindingFlags.Instance | BindingFlags.NonPublic);
             fieldValue.SetValue(game, secretNumber);
 
-            int bulls, cows;
-            game.IsGuessCorrect("3211", out bulls, out cows);
+            int bulls = 0;
+            int cows = 0;
+            game.IsGuessCorrect("3211", ref bulls, ref cows);
             Assert.IsTrue(bulls == 1 && cows == 2);
         }
 
@@ -53,8 +54,9 @@ namespace BullsAndCowsGame.Tests
             var fieldValue = type.GetField("secretDigits", BindingFlags.Instance | BindingFlags.NonPublic);
             fieldValue.SetValue(game, secretNumber);
 
-            int bulls, cows;
-            game.IsGuessCorrect("5699", out bulls, out cows);
+            int bulls = 0;
+            int cows = 0;
+            game.IsGuessCorrect("5699", ref bulls, ref cows);
             Assert.IsTrue(bulls == 0 && cows == 0);
         }
 
@@ -68,8 +70,9 @@ namespace BullsAndCowsGame.Tests
             var fieldValue = type.GetField("secretDigits", BindingFlags.Instance | BindingFlags.NonPublic);
             fieldValue.SetValue(game, secretNumber);
 
-            int bulls, cows;
-            game.IsGuessCorrect("1234", out bulls, out cows);
+            int bulls = 0;
+            int cows = 0;
+            game.IsGuessCorrect("1234", ref bulls, ref cows);
             Assert.IsTrue(bulls == 4 && cows == 0);
         }
 
@@ -83,8 +86,9 @@ namespace BullsAndCowsGame.Tests
             var fieldValue = type.GetField("secretDigits", BindingFlags.Instance | BindingFlags.NonPublic);
             fieldValue.SetValue(game, secretNumber);
 
-            int bulls, cows;
-            game.IsGuessCorrect("4321", out bulls, out cows);
+            int bulls = 0;
+            int cows = 0;
+            game.IsGuessCorrect("4321", ref bulls, ref cows);
             Assert.IsTrue(bulls == 0 && cows == 4);
         }
 
@@ -98,8 +102,9 @@ namespace BullsAndCowsGame.Tests
             var fieldValue = type.GetField("secretDigits", BindingFlags.Instance | BindingFlags.NonPublic);
             fieldValue.SetValue(game, secretNumber);
 
-            int bulls, cows;
-            game.IsGuessCorrect("2528", out bulls, out cows);
+            int bulls = 0;
+            int cows = 0;
+            game.IsGuessCorrect("2528", ref bulls, ref cows);
             Assert.IsTrue(bulls == 0 && cows == 1);
         }
 
@@ -113,8 +118,9 @@ namespace BullsAndCowsGame.Tests
             var fieldValue = type.GetField("secretDigits", BindingFlags.Instance | BindingFlags.NonPublic);
             fieldValue.SetValue(game, secretNumber);
 
-            int bulls, cows;
-            game.IsGuessCorrect("2259", out bulls, out cows);
+            int bulls = 0;
+            int cows = 0;
+            game.IsGuessCorrect("2259", ref bulls, ref cows);
             Assert.IsTrue(bulls == 1 && cows == 0);
         }
 
@@ -128,8 +134,9 @@ namespace BullsAndCowsGame.Tests
             var fieldValue = type.GetField("secretDigits", BindingFlags.Instance | BindingFlags.NonPublic);
             fieldValue.SetValue(game, secretNumber);
 
-            int bulls, cows;
-            game.IsGuessCorrect("2431", out bulls, out cows);
+            int bulls = 0;
+            int cows = 0;
+            game.IsGuessCorrect("2431", ref bulls, ref cows);
             Assert.IsTrue(bulls == 1 && cows == 3);
         }
 
@@ -143,8 +150,9 @@ namespace BullsAndCowsGame.Tests
             var fieldValue = type.GetField("secretDigits", BindingFlags.Instance | BindingFlags.NonPublic);
             fieldValue.SetValue(game, secretNumber);
 
-            int bulls, cows;
-            game.IsGuessCorrect("4231", out bulls, out cows);
+            int bulls = 0;
+            int cows = 0;
+            game.IsGuessCorrect("4231", ref bulls, ref cows);
             Assert.IsTrue(bulls == 2 && cows == 2);
         }
 
@@ -158,8 +166,9 @@ namespace BullsAndCowsGame.Tests
             var fieldValue = type.GetField("secretDigits", BindingFlags.Instance | BindingFlags.NonPublic);
             fieldValue.SetValue(game, secretNumber);
 
-            int bulls, cows;
-            game.IsGuessCorrect("4553", out bulls, out cows);
+            int bulls = 0;
+            int cows = 0;
+            game.IsGuessCorrect("4553", ref bulls, ref cows);
             Assert.IsTrue(bulls == 1 && cows == 1);
         }
 
@@ -167,7 +176,7 @@ namespace BullsAndCowsGame.Tests
         public void CheckRandomGenerator()
         {
             BullsAndCowsNumber secretNumberOne = new BullsAndCowsNumber();
-            Thread.Sleep(500);
+            Thread.Sleep(100);
             BullsAndCowsNumber secretNumberTwo = new BullsAndCowsNumber();
 
             Assert.AreEqual(false, secretNumberOne.SecretDigits == secretNumberTwo.SecretDigits);
@@ -181,7 +190,7 @@ namespace BullsAndCowsGame.Tests
             string guess = "12345";
             int bulls = 0, cows = 0;
 
-            Assert.IsFalse(secretNumber.IsGuessCorrect(guess, out bulls, out cows));
+            Assert.IsFalse(secretNumber.IsGuessCorrect(guess, ref bulls, ref cows));
         }
 
         [TestMethod]
@@ -192,7 +201,7 @@ namespace BullsAndCowsGame.Tests
             string guess = "pesh";
             int bulls = 0, cows = 0;
 
-            Assert.IsFalse(secretNumber.IsGuessCorrect(guess, out bulls, out cows));
+            Assert.IsFalse(secretNumber.IsGuessCorrect(guess, ref bulls, ref cows));
         }
 
         [TestMethod]

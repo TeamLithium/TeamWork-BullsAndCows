@@ -63,11 +63,8 @@ namespace BullsAndCows
         /// <param name="guess">Pass the guess as a string</param>
         /// <param name="bulls">A pointer to the bulls variable</param>
         /// <param name="cows">A pointer to the bulls cows</param>
-        public bool IsGuessCorrect(string guess, out int bulls, out int cows)
+        public bool IsGuessCorrect(string guess, ref int bulls, ref int cows)
         {
-            bulls = 0;
-            cows = 0;
-
             if (guess.Length != this.DigitsNumber)
             {
                 return false;

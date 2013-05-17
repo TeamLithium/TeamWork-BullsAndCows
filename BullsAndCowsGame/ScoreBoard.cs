@@ -33,13 +33,13 @@ namespace BullsAndCows
         /// <summary>
         /// Checks if a given score is an attempt
         /// </summary>
-        /// <param name="attempts">Pass the number of attempts by the user.</param>
+        /// <param name="score">Pass the number of attempts by the user.</param>
         /// <returns>True if the last of the scores in the sorted 
         /// highScore list has less attempts
         /// </returns>
-        public bool IsHighScore(int attempts)
+        public bool IsHighScore(int score)
         {
-            if (this.highScores.Count < this.BoardSize || this.highScores.Last().Value > attempts)
+            if (this.highScores.Count < this.BoardSize || this.highScores.Last().Value > score)
             {
                 return true;
             }
@@ -52,10 +52,10 @@ namespace BullsAndCows
         /// element of the list if the list has more elements than BoardSize
         /// </summary>
         /// <param name="name">Pass the user name as a string</param>
-        /// <param name="attempts">Pass the number of attempts as an integer</param>
-        public void Add(string name, int attempts)
+        /// <param name="score">Pass the number of attempts as an integer</param>
+        public void Add(string name, int score)
         {
-            this.highScores.Add(new KeyValuePair<string, int>(name, attempts));
+            this.highScores.Add(new KeyValuePair<string, int>(name, score));
 
             this.Sort();
 
