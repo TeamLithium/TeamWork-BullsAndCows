@@ -1,0 +1,168 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>BullsAndCows</name>
+    </assembly>
+    <members>
+        <member name="T:BullsAndCows.BullsAndCowsNumber">
+            <summary>
+            Class that holds the computer's secret number
+            </summary>
+        </member>
+        <member name="F:BullsAndCows.BullsAndCowsNumber.DigitsNumber">
+            <summary>
+            A readonly field which contains the number of digits in the secret number
+            </summary>
+        </member>
+        <member name="F:BullsAndCows.BullsAndCowsNumber.secretDigits">
+            <summary>
+            List that holds the digits in the secret number
+            </summary>
+        </member>
+        <member name="F:BullsAndCows.BullsAndCowsNumber.helpDigits">
+            <summary>
+            Char string which initially contains XXXX. After calling the RevealRandomDigit method 
+            one random X is replaced with a number from the secretDigits list
+            </summary>
+        </member>
+        <member name="M:BullsAndCows.BullsAndCowsNumber.#ctor">
+            <summary>
+            Constructor for the class
+            </summary>
+        </member>
+        <member name="M:BullsAndCows.BullsAndCowsNumber.IsGuessCorrect(System.String,System.Int32@,System.Int32@)">
+            <summary>
+            Checks if user guess is correct and if true, returns the number of bulls and cows
+            in the guess.
+            </summary>
+            <param name="guess">Pass the guess as a string</param>
+            <param name="bulls">A pointer to the bulls variable</param>
+            <param name="cows">A pointer to the bulls cows</param>
+        </member>
+        <member name="M:BullsAndCows.BullsAndCowsNumber.RevealRandomDigit(System.Int32@)">
+            <summary>
+            Checks if the max amount of helps is used. If used returns a string containing apropriate 
+            message. If not used changes the first X to a number in the helpDigits string
+            and returns a string containing a message with the numbers
+            </summary>
+            <param name="helpUsedCount">Pass the number of helps currently used as a refference</param>
+        </member>
+        <member name="M:BullsAndCows.BullsAndCowsNumber.CreateRandomDigits">
+            <summary>
+            A private method filling the list of digits (secretDigits). And the helpDigits with X's
+            </summary>
+        </member>
+        <member name="P:BullsAndCows.BullsAndCowsNumber.SecretDigits">
+            <summary>
+            Basic property for the secretDigits list. Returns the secretDigits as an integer number
+            </summary>
+        </member>
+        <member name="T:BullsAndCows.PlayEngine">
+            <summary>
+            A class maintaining the commands and the user input. 
+            </summary>
+        </member>
+        <member name="F:BullsAndCows.PlayEngine.StartText">
+            <summary>
+            A constant string, containing the welcome message of the game
+            </summary>
+        </member>
+        <member name="F:BullsAndCows.PlayEngine.isGameRunning">
+            <summary>
+            A bool variable which indicates if a game is currently running or not.
+            </summary>
+        </member>
+        <member name="F:BullsAndCows.PlayEngine.helpUsedCount">
+            <summary>
+            Counts the number of helps used
+            </summary>
+        </member>
+        <member name="F:BullsAndCows.PlayEngine.atemptsCount">
+            <summary>
+            Counts the number of atempts by the user.
+            </summary>
+        </member>
+        <member name="F:BullsAndCows.PlayEngine.scoreBoard">
+            <summary>
+            A variable of type ScoreBoard which contains the high scores in the game
+            </summary>
+        </member>
+        <member name="M:BullsAndCows.PlayEngine.StartGame">
+            <summary>
+            Stats the game, gets user input and using a switch statement selects the
+            apropriate menu
+            </summary>
+        </member>
+        <member name="M:BullsAndCows.PlayEngine.ManageUserGuess(System.String,BullsAndCows.BullsAndCowsNumber)">
+            <summary>
+            A private method which manages the user guess if the input is a string 
+            different than a command. If the guess is a string of numbers, the 
+            method is executed completely. If not prints an apropriate message.
+            </summary>
+        </member>
+        <member name="T:BullsAndCows.PlayGame">
+            <summary>
+            The play class of the program. Contains the main method.
+            </summary>
+        </member>
+        <member name="M:BullsAndCows.PlayGame.Main">
+            <summary>
+            The main method of the program. Starts the game.
+            </summary>
+        </member>
+        <member name="T:BullsAndCows.ScoreBoard">
+            <summary>
+            Class containing the high scores in a game.
+            </summary>
+        </member>
+        <member name="F:BullsAndCows.ScoreBoard.BoardSize">
+            <summary>
+            A readonly field containing the size of the high scores board
+            </summary>
+        </member>
+        <member name="F:BullsAndCows.ScoreBoard.highScores">
+            <summary>
+            List , containing users currently in the high scores board
+            </summary>
+        </member>
+        <member name="M:BullsAndCows.ScoreBoard.#ctor">
+            <summary>
+            Constructor for the class. Initializes the highScores list
+            </summary>
+        </member>
+        <member name="M:BullsAndCows.ScoreBoard.IsHighScore(System.Int32)">
+            <summary>
+            Checks if a given score is an attempt
+            </summary>
+            <param name="attempts">Pass the number of attempts by the user.</param>
+            <returns>True if the last of the scores in the sorted 
+            highScore list has less attempts
+            </returns>
+        </member>
+        <member name="M:BullsAndCows.ScoreBoard.Add(System.String,System.Int32)">
+            <summary>
+            Adds ann attemt to the high scores board and removes the last 
+            element of the list if the list has more elements than BoardSize
+            </summary>
+            <param name="name">Pass the user name as a string</param>
+            <param name="attempts">Pass the number of attempts as an integer</param>
+        </member>
+        <member name="M:BullsAndCows.ScoreBoard.Count">
+            <summary>
+            Property which contains the number of high scores currently in the board
+            </summary>
+        </member>
+        <member name="M:BullsAndCows.ScoreBoard.ToString">
+            <summary>
+            An override mothod for ToString(). Building the high scores board
+            in an elegant and beautiful way. Almost sexy!
+            </summary>
+            <returns>String containing the formated high scores board</returns>
+        </member>
+        <member name="M:BullsAndCows.ScoreBoard.Sort">
+            <summary>
+            Void method which sorts the list of high score
+            </summary>
+        </member>
+    </members>
+</doc>
